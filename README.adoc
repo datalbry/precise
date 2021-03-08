@@ -1,0 +1,84 @@
+:hide-uri-scheme:
+:toc: preamble
+
+= Precise
+
+Precise is just another schema framework enabling to describe data and documents very precisely.
+It's programming language agnostic and works via schema validation.
+
+DataLbry is a data-integration specialised firm, which heavily relies on structured data.
+The main reason for us to drive a custom schema framework forward, is the lack of
+
+NOTE: There are several other schema frameworks out there, such as `+Apache Avro+`, `+Apache Thrift+` and `+Protocol Buffers+`.
+
+== Schemas
+
+Precise heavily relies on Schemas, so every time we are serializing a type to json, we require the schema.
+Whenever Precise deserializes data, it also requires a Schema.
+
+The Schema holds the information of how the data looks like, which fields it contains and which version it has.
+To avoid the complexity to always write the Schema manually,
+Precise provides tools for Schema generation from e.g. Kotlin Data Classes.
+
+== Types
+
+=== Primitive Types
+Precise supports the following primitive data types
+
+ * `+null:+` No value
+ * `+int:+` 32-bit signed integer
+ * `+long:+` 64-bit signed integer
+ * `+float:+` single-precision (32-bit) IEEE 754 floating-point number
+ * `+double:+` double-precision (64-bit) IEEE 754 floating-point number
+ * `+bytes:+` sequence of 8-bit unsigned bytes
+ * `+string:+` unicode character sequence
+
+== Complex Types
+
+Precise supports different kind of complex types.
+
+ * `+document+` describes a list of fields and can contain binary data.
+ * `+record+` describes a record, or a row in SQL. It primarily differs from `+document+`
+as it may not contain any binary data.
+ * `+enum+` contains a list of predefined string values.
+
+Complex types can be described within a `+schema.json+`
+
+=== Definition
+
+The Definition of complex types can be done right in the `+schema.json+`.
+A Document definition may contain a list of fields. All fields
+
+.Example: Document Type Definition
+[source,json]
+----
+include::docs/schema/complex-type-definition.json[]
+----
+
+=== Predefined Types
+
+Precise ships with a few predefined complex types, such as `+Date+`, `+DateTime+` and `+Instant+`.
+
+* `+Date+` ISO 8601 date string
+* `+DateTime+` ISO 8601 date and time string
+* `+Instant+`
+
+=== Custom Types
+
+== License
+
+....
+Copyright 2021 DataLbry.io
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+....

@@ -1,0 +1,17 @@
+{
+  "type": "document",
+  "name": "space",
+  "fields": [
+    {
+      "name": "name",
+      "optional": "false",
+      "type": "string",
+      "default": "Unknown"
+    },
+    {
+      "name": "name",
+      "optional": "false",
+      "type": "string"
+    }
+  ]
+}
