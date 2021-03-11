@@ -9,6 +9,5 @@ pluginManagement {
 
 include(
     "api",
-    "processor-kotlin",
-    "validation"
+    "processor-kotlin"
 )

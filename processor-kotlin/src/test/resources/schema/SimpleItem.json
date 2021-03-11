@@ -1,14 +1,12 @@
 {
-  "types": [
-    {
-      "type": "document",
-      "name": "SimpleItem",
-      "fields": [
-        {
-          "name": "name",
-          "type": "string"
-        }
-      ]
-    }
-  ]
+  "types" : [ {
+    "name" : "SimpleItem",
+    "fields" : [ {
+      "name" : "",
+      "type" : "String",
+      "multiValue" : false,
+      "optional" : false
+    } ],
+    "type" : "DOCUMENT"
+  } ]
 }

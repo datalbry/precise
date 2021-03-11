@@ -1,6 +1,8 @@
 package io.datalbry.precise.processor.kotlin
 
 import io.datalbry.precise.processor.kotlin.assertion.assertSameContent
+import io.datalbry.precise.processor.kotlin.items.enumItem
+import io.datalbry.precise.processor.kotlin.items.itemWithOnePrimitiveType
 import io.datalbry.precise.processor.kotlin.util.compile
 import io.datalbry.precise.processor.kotlin.util.getSchemaFile
 import io.datalbry.precise.processor.kotlin.util.getTestSchema
@@ -33,11 +35,15 @@ internal class SchemaAwareProcessorTest {
 
     @Test
     fun process_simpleItem_worksJustFine() {
-        val compiledSchema = compile(simpleItem).getSchemaFile()
+        val compiledSchema = compile(itemWithOnePrimitiveType).getSchemaFile()
         val testSchema = getTestSchema<SchemaAwareProcessor>("SimpleItem.json")
         assertSameContent(compiledSchema, testSchema)
     }
 
-
-
+    @Test
+    fun process_enumItem_worksJustFine() {
+        val compiledSchema = compile(enumItem).getSchemaFile()
+        val testSchema = getTestSchema<SchemaAwareProcessor>("EnumItem.json")
+        assertSameContent(compiledSchema, testSchema)
+    }
 }

@@ -1,0 +1,7 @@
+{
+  "types" : [ {
+    "name" : "Status",
+    "values" : [ "RUNNING", "PAUSED", "STOPPED" ],
+    "type" : "ENUM"
+  } ]
+}
