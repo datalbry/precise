@@ -7,7 +7,7 @@ Precise is just another schema framework enabling to describe data and documents
 It's programming language agnostic and works via schema validation.
 
 DataLbry is a data-integration specialised firm, which heavily relies on structured data.
-The main reason for us to drive a custom schema framework forward, is the lack of
+The main reason for us to drive a custom schema framework forward, is the lack of support for hybrid structures.
 
 NOTE: There are several other schema frameworks out there, such as `+Apache Avro+`, `+Apache Thrift+` and `+Protocol Buffers+`.
 
@@ -33,7 +33,7 @@ Precise supports the following primitive data types
  * `+bytes:+` sequence of 8-bit unsigned bytes
  * `+string:+` unicode character sequence
 
-== Complex Types
+=== Complex Types
 
 Precise supports different kind of complex types.
 
@@ -44,7 +44,7 @@ as it may not contain any binary data.
 
 Complex types can be described within a `+schema.json+`
 
-=== Definition
+==== Definition
 
 The Definition of complex types can be done right in the `+schema.json+`.
 A Document definition may contain a list of fields. All fields
@@ -55,15 +55,12 @@ A Document definition may contain a list of fields. All fields
 include::docs/schema/complex-type-definition.json[]
 ----
 
-=== Predefined Types
+==== Predefined Types
 
-Precise ships with a few predefined complex types, such as `+Date+`, `+DateTime+` and `+Instant+`.
+Precise ships with a few predefined types, such as `+Date+`, `+DateTime+` and `+Instant+`.
 
 * `+Date+` ISO 8601 date string
 * `+DateTime+` ISO 8601 date and time string
-* `+Instant+`
-
-=== Custom Types
 
 == License
 

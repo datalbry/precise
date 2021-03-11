@@ -1,0 +1,14 @@
+{
+  "types": [
+    {
+      "type": "document",
+      "name": "SimpleItem",
+      "fields": [
+        {
+          "name": "name",
+          "type": "string"
+        }
+      ]
+    }
+  ]
+}

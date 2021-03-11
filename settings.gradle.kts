@@ -1,6 +1,14 @@
-rootProject.name = "another-schema-framework"
+rootProject.name = "precise"
+
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+    }
+}
 
 include(
-    "core",
-    "api"
+    "api",
+    "processor-kotlin",
+    "validation"
 )
