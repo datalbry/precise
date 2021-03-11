@@ -38,8 +38,7 @@ Precise supports the following primitive data types
 Precise supports different kind of complex types.
 
  * `+document+` describes a list of fields and can contain binary data.
- * `+record+` describes a record, or a row in SQL. It primarily differs from `+document+`
-as it may not contain any binary data.
+ * `+record+` describes a record, or a row in SQL. It primarily differs from `+document+` as it may not contain any binary data.
  * `+enum+` contains a list of predefined string values.
 
 Complex types can be described within a `+schema.json+`
