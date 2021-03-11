@@ -57,7 +57,7 @@ include::docs/schema/complex-type-definition.json[]
 
 ==== Predefined Types
 
-Precise ships with a few predefined types, such as `+Date+`, `+DateTime+` and `+Instant+`.
+Precise ships with a few predefined types:
 
 * `+Date+` ISO 8601 date string
 * `+DateTime+` ISO 8601 date and time string
