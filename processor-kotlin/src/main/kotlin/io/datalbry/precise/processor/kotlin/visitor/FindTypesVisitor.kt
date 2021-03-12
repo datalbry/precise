@@ -4,6 +4,7 @@ import com.google.devtools.ksp.processing.KSPLogger
 import com.google.devtools.ksp.symbol.KSNode
 import com.google.devtools.ksp.symbol.KSPropertyDeclaration
 import com.google.devtools.ksp.visitor.KSEmptyVisitor
+import io.datalbry.precise.api.schema.field.BasicFieldTypes
 import io.datalbry.precise.api.schema.field.Field
 import io.datalbry.precise.api.schema.type.DocumentType
 import io.datalbry.precise.api.schema.type.EnumType
@@ -42,8 +43,25 @@ class FindTypesVisitor(private val logger: KSPLogger): KSEmptyVisitor<Unit, Set<
 
     private fun toField(property: KSPropertyDeclaration): Field {
         return Field(
-            property.simpleName.getQualifier(),
-            property.type.toString()
+            property.simpleName.asString(),
+            getType(property)
         )
+    }
+
+    private fun getType(property: KSPropertyDeclaration): String {
+        val name = property.type.toString()
+        return if (isBasicFieldType(name)) {
+            sanitizeBasicFieldTypeName(name)
+        } else {
+            name
+        }
+    }
+
+    private fun isBasicFieldType(name: String): Boolean {
+        return BasicFieldTypes.values().map { it.id }.contains(sanitizeBasicFieldTypeName(name))
+    }
+
+    private fun sanitizeBasicFieldTypeName(name: String): String {
+        return name.toLowerCase()
     }
 }

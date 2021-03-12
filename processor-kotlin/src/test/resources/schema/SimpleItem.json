@@ -2,8 +2,8 @@
   "types" : [ {
     "name" : "SimpleItem",
     "fields" : [ {
-      "name" : "",
-      "type" : "String",
+      "name" : "name",
+      "type" : "string",
       "multiValue" : false,
       "optional" : false
     } ],

@@ -17,13 +17,17 @@ class FindTypeVisitor: KSDefaultVisitor<Unit, Type>() {
 
     override fun visitClassDeclaration(classDeclaration: KSClassDeclaration, data: Unit): Type {
         return object : Type {
-            override val name = classDeclaration.simpleName.asString()
+            override val name = getName(classDeclaration)
             override val type = getType(classDeclaration)
         }
     }
 
     override fun defaultHandler(node: KSNode, data: Unit): Type {
         throw NotImplementedError("Only visitClassDeclaration() is supported")
+    }
+
+    private fun getName(classDeclaration: KSClassDeclaration): String {
+        return classDeclaration.simpleName.asString()
     }
 
     private fun getType(classDeclaration: KSClassDeclaration): Types {
