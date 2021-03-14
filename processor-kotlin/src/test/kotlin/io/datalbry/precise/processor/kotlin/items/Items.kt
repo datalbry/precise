@@ -137,3 +137,17 @@ val innerTypeAuthor = SourceFile.kotlin(
     )
     """
 )
+
+val itemWithNameList = SourceFile.kotlin(
+    "ItemWithNameList.kt",
+    """
+    package io.datalbry.example
+
+    import io.datalbry.precise.api.schema.SchemaAware
+
+    @SchemaAware
+    data class ItemWithNameList(
+        val names: List<String>,
+    )
+    """
+)

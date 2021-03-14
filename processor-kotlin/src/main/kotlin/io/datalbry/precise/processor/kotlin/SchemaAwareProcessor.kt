@@ -39,7 +39,7 @@ class SchemaAwareProcessor: SymbolProcessor {
     }
 
     override fun process(resolver: Resolver): List<KSAnnotated> {
-        val typeVisitor = FindTypesVisitor(logger)
+        val typeVisitor = FindTypesVisitor(logger, resolver)
 
         val annotationModels = resolver.getSymbolsWithAnnotation(SchemaAware::class.java.canonicalName)
 

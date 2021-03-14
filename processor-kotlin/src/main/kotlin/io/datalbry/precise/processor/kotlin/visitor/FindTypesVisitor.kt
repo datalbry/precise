@@ -1,6 +1,7 @@
 package io.datalbry.precise.processor.kotlin.visitor
 
 import com.google.devtools.ksp.processing.KSPLogger
+import com.google.devtools.ksp.processing.Resolver
 import com.google.devtools.ksp.symbol.KSNode
 import com.google.devtools.ksp.symbol.KSPropertyDeclaration
 import com.google.devtools.ksp.visitor.KSEmptyVisitor
@@ -17,8 +18,12 @@ import io.datalbry.precise.processor.kotlin.extension.*
  *
  * @author timo gruen - 2021-03-11
  */
-class FindTypesVisitor(private val logger: KSPLogger): KSEmptyVisitor<Unit, Set<Type>>() {
-
+class FindTypesVisitor(
+    private val logger: KSPLogger,
+    private val resolver: Resolver
+)
+    : KSEmptyVisitor<Unit, Set<Type>>()
+{
     private val typeVisitor = FindTypeVisitor()
     private val fieldVisitor = FindFieldVisitor()
     private val valueVisitor = FindEnumValueVisitor()
@@ -60,19 +65,23 @@ class FindTypesVisitor(private val logger: KSPLogger): KSEmptyVisitor<Unit, Set<
     private fun isMultiValued(property: KSPropertyDeclaration): Boolean {
         if (property.isArray()) return true
         if (property.isPrimitiveArray()) return true
+        if (property.isCollection(resolver)) return true
         return false
     }
 
     private fun getType(property: KSPropertyDeclaration): String {
-
         val name = when {
             property.isArray() -> property.getInnerType().simpleName.asString()
             property.isPrimitiveArray() -> property.getInnerTypeNameOfPrimitiveArray()
             property.isOptional() -> property.getInnerType().simpleName.asString()
+            property.isCollection(resolver) -> property.getInnerType().simpleName.asString()
             property.isNullable() -> property.type.resolve().declaration.simpleName.asString()
             else -> property.type.toString()
         }
+        return sanitizeTypeString(name)
+    }
 
+    private fun sanitizeTypeString(name: String): String {
         return if (isBasicFieldType(name)) {
             sanitizeBasicFieldTypeName(name)
         } else {

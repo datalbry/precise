@@ -33,63 +33,70 @@ import org.junit.jupiter.api.Test
 internal class SchemaAwareProcessorTest {
 
     @Test
-    fun process_simpleItem_worksJustFine() {
-        val compiledSchema = compile(itemWithOnePrimitiveType).getSchemaFile()
-        val testSchema = getTestSchema<SchemaAwareProcessor>("SimpleItem.json")
-        assertSameContent(compiledSchema, testSchema)
-    }
-
-    @Test
-    fun process_enumItem_worksJustFine() {
+    fun process_enum_generatedSchemaEquals() {
         val compiledSchema = compile(enumItem).getSchemaFile()
         val testSchema = getTestSchema<SchemaAwareProcessor>("EnumItem.json")
         assertSameContent(compiledSchema, testSchema)
     }
 
     @Test
-    fun process_item_WithMultiplePrimitiveTypes() {
+    fun process_documentWithStringField_generatedSchemaEquals() {
+        val compiledSchema = compile(itemWithOnePrimitiveType).getSchemaFile()
+        val testSchema = getTestSchema<SchemaAwareProcessor>("SimpleItem.json")
+        assertSameContent(compiledSchema, testSchema)
+    }
+
+    @Test
+    fun process_documentWithMultiplePrimitiveTypes_generatedSchemaEquals() {
         val compiledSchema = compile(itemWithMultiplePrimitiveTypes).getSchemaFile()
         val testSchema = getTestSchema<SchemaAwareProcessor>("ItemWithMultiplePrimitiveTypes.json")
         assertSameContent(compiledSchema, testSchema)
     }
 
     @Test
-    fun process_item_withArrayField() {
+    fun process_documentWithArrayField_generatedSchemaEquals() {
         val compiledSchema = compile(itemWithArrayType).getSchemaFile()
         val testSchema = getTestSchema<SchemaAwareProcessor>("ItemWithArrayType.json")
         assertSameContent(compiledSchema, testSchema)
     }
 
     @Test
-    fun process_item_withPrimitiveArrayField() {
+    fun process_documentWithPrimitiveArrayField_generatedSchemaEquals() {
         val compiledSchema = compile(itemWithPrimitiveArrayType).getSchemaFile()
         val testSchema = getTestSchema<SchemaAwareProcessor>("ItemWithPrimitiveArrayType.json")
         assertSameContent(compiledSchema, testSchema)
     }
 
     @Test
-    fun process_item_withNullableField() {
+    fun process_documentWithNullableField_generatedSchemaEquals() {
         val compiledSchema = compile(itemWithNullableType).getSchemaFile()
         val testSchema = getTestSchema<SchemaAwareProcessor>("ItemWithNullableType.json")
         assertSameContent(compiledSchema, testSchema)
     }
 
     @Test
-    fun process_item_withOptionalType() {
+    fun process_documentWithOptionalField_generatedSchemaEquals() {
         val compiledSchema = compile(itemWithOptionalType).getSchemaFile()
         val testSchema = getTestSchema<SchemaAwareProcessor>("ItemWithOptionalType.json")
         assertSameContent(compiledSchema, testSchema)
     }
 
     @Test
-    fun process_multipleItems_getsAggregated() {
+    fun process_documentWithListField_generatedSchemaEquals() {
+        val compiledSchema = compile(itemWithNameList).getSchemaFile()
+        val testSchema = getTestSchema<SchemaAwareProcessor>("ItemWithListType.json")
+        assertSameContent(compiledSchema, testSchema)
+    }
+
+    @Test
+    fun process_schemaWithAggregatedDocuments_generatedSchemaEquals() {
         val compiledSchema = compile(itemWithOnePrimitiveType, itemWithOptionalType, itemWithArrayType).getSchemaFile()
         val testSchema = getTestSchema<SchemaAwareProcessor>("AggregatedItems.json")
         assertSameContent(compiledSchema, testSchema)
     }
 
     @Test
-    fun process_multipleItems_withCrossLinkingFields() {
+    fun process_schemaWithCrossLinkingDocumentFields_generatedSchemaEquals() {
         val compiledSchema = compile(itemWithCrossLinkToAuthor, innerTypeAuthor).getSchemaFile()
         val testSchema = getTestSchema<SchemaAwareProcessor>("ItemWithInnerTypeAuthor.json")
         assertSameContent(compiledSchema, testSchema)
