@@ -1,0 +1,12 @@
+{
+  "types" : [ {
+    "name" : "SimpleItem",
+    "fields" : [ {
+      "name" : "name",
+      "type" : "string",
+      "multiValue" : false,
+      "optional" : false
+    } ],
+    "type" : "DOCUMENT"
+  } ]
+}

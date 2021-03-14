@@ -36,7 +36,7 @@ enum class BasicFieldTypes(val id: String) {
     /**
      * sequence of 8-bit unsigned bytes
      */
-    BYTES("bytes"),
+    BYTE("byte"),
 
     /**
      * unicode character sequence
