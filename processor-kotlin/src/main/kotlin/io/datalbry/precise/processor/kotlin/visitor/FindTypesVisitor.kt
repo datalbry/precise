@@ -21,9 +21,7 @@ import io.datalbry.precise.processor.kotlin.extension.*
 class FindTypesVisitor(
     private val logger: KSPLogger,
     private val resolver: Resolver
-)
-    : KSEmptyVisitor<Unit, Set<Type>>()
-{
+): KSEmptyVisitor<Unit, Set<Type>>() {
     private val typeVisitor = FindTypeVisitor()
     private val fieldVisitor = FindFieldVisitor()
     private val valueVisitor = FindEnumValueVisitor()
