@@ -1,11 +1,11 @@
 {
   "types" : [ {
-    "name" : "SimpleItem",
+    "name" : "ItemWithNullableType",
     "fields" : [ {
       "name" : "name",
       "type" : "string",
       "multiValue" : false,
-      "optional" : false
+      "optional" : true
     } ],
     "type" : "DOCUMENT"
   } ]

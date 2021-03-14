@@ -1,8 +1,7 @@
 package io.datalbry.precise.processor.kotlin
 
 import io.datalbry.precise.processor.kotlin.assertion.assertSameContent
-import io.datalbry.precise.processor.kotlin.items.enumItem
-import io.datalbry.precise.processor.kotlin.items.itemWithOnePrimitiveType
+import io.datalbry.precise.processor.kotlin.items.*
 import io.datalbry.precise.processor.kotlin.util.compile
 import io.datalbry.precise.processor.kotlin.util.getSchemaFile
 import io.datalbry.precise.processor.kotlin.util.getTestSchema
@@ -44,6 +43,55 @@ internal class SchemaAwareProcessorTest {
     fun process_enumItem_worksJustFine() {
         val compiledSchema = compile(enumItem).getSchemaFile()
         val testSchema = getTestSchema<SchemaAwareProcessor>("EnumItem.json")
+        assertSameContent(compiledSchema, testSchema)
+    }
+
+    @Test
+    fun process_item_WithMultiplePrimitiveTypes() {
+        val compiledSchema = compile(itemWithMultiplePrimitiveTypes).getSchemaFile()
+        val testSchema = getTestSchema<SchemaAwareProcessor>("ItemWithMultiplePrimitiveTypes.json")
+        assertSameContent(compiledSchema, testSchema)
+    }
+
+    @Test
+    fun process_item_withArrayField() {
+        val compiledSchema = compile(itemWithArrayType).getSchemaFile()
+        val testSchema = getTestSchema<SchemaAwareProcessor>("ItemWithArrayType.json")
+        assertSameContent(compiledSchema, testSchema)
+    }
+
+    @Test
+    fun process_item_withPrimitiveArrayField() {
+        val compiledSchema = compile(itemWithPrimitiveArrayType).getSchemaFile()
+        val testSchema = getTestSchema<SchemaAwareProcessor>("ItemWithPrimitiveArrayType.json")
+        assertSameContent(compiledSchema, testSchema)
+    }
+
+    @Test
+    fun process_item_withNullableField() {
+        val compiledSchema = compile(itemWithNullableType).getSchemaFile()
+        val testSchema = getTestSchema<SchemaAwareProcessor>("ItemWithNullableType.json")
+        assertSameContent(compiledSchema, testSchema)
+    }
+
+    @Test
+    fun process_item_withOptionalType() {
+        val compiledSchema = compile(itemWithOptionalType).getSchemaFile()
+        val testSchema = getTestSchema<SchemaAwareProcessor>("ItemWithOptionalType.json")
+        assertSameContent(compiledSchema, testSchema)
+    }
+
+    @Test
+    fun process_multipleItems_getsAggregated() {
+        val compiledSchema = compile(itemWithOnePrimitiveType, itemWithOptionalType, itemWithArrayType).getSchemaFile()
+        val testSchema = getTestSchema<SchemaAwareProcessor>("AggregatedItems.json")
+        assertSameContent(compiledSchema, testSchema)
+    }
+
+    @Test
+    fun process_multipleItems_withCrossLinkingFields() {
+        val compiledSchema = compile(itemWithCrossLinkToAuthor, innerTypeAuthor).getSchemaFile()
+        val testSchema = getTestSchema<SchemaAwareProcessor>("ItemWithInnerTypeAuthor.json")
         assertSameContent(compiledSchema, testSchema)
     }
 }

@@ -2,9 +2,8 @@ package io.datalbry.precise.processor.kotlin.items
 
 import com.tschuchort.compiletesting.SourceFile
 
-
 val itemWithOnePrimitiveType = SourceFile.kotlin(
-    "Item.kt",
+    "SimpleItem.kt",
     """
     package io.datalbry.example
 
@@ -13,6 +12,24 @@ val itemWithOnePrimitiveType = SourceFile.kotlin(
     @SchemaAware
     data class SimpleItem(
         val name: String,
+    )
+    """
+)
+
+val itemWithMultiplePrimitiveTypes = SourceFile.kotlin(
+    "ItemWithMultiplePrimitiveTypes.kt",
+    """
+    package io.datalbry.example
+
+    import io.datalbry.precise.api.schema.SchemaAware
+
+    @SchemaAware
+    data class ItemWithMultiplePrimitiveTypes(
+        val name: String,
+        val count: Int,
+        val hugeCount: Long,
+        val currency: Float,
+        val hugeCurrency: Double
     )
     """
 )
@@ -33,20 +50,90 @@ val enumItem = SourceFile.kotlin(
     """
 )
 
-val itemWithMultiplePrimitiveTypes = SourceFile.kotlin(
-    "Item.kt",
+val itemWithArrayType = SourceFile.kotlin(
+    "ItemWithStringArray.kt",
     """
     package io.datalbry.example
 
     import io.datalbry.precise.api.schema.SchemaAware
 
     @SchemaAware
-    data class SimpleItem(
+    data class ItemWithStringArray(
+        val names: Array<String>
+    )
+    """
+)
+
+val itemWithPrimitiveArrayType = SourceFile.kotlin(
+    "ItemWithPrimitiveArray.kt",
+    """
+    package io.datalbry.example
+
+    import io.datalbry.precise.api.schema.SchemaAware
+
+    @SchemaAware
+    data class ItemWithPrimitiveArray(
+        val numbers: IntArray
+    )
+    """
+)
+
+val itemWithOptionalType = SourceFile.kotlin(
+    "ItemWithOptionalType.kt",
+    """
+    package io.datalbry.example
+
+    import java.util.*
+    import io.datalbry.precise.api.schema.SchemaAware
+
+    @SchemaAware
+    data class ItemWithOptionalType(
+        val name: Optional<String>
+    )
+    """
+)
+
+val itemWithNullableType = SourceFile.kotlin(
+    "ItemWithNullableType.kt",
+    """
+    package io.datalbry.example
+
+    import io.datalbry.precise.api.schema.SchemaAware
+
+    @SchemaAware
+    data class ItemWithNullableType(
+        val name: String?
+    )
+    """
+)
+
+val itemWithCrossLinkToAuthor = SourceFile.kotlin(
+    "ItemWithCrossLinkToAuthor.kt",
+    """
+    package io.datalbry.example
+
+    import io.datalbry.example.Author
+    import io.datalbry.precise.api.schema.SchemaAware
+
+    @SchemaAware
+    data class ItemWithCrossLinkToAuthor(
         val name: String,
-        val count: Int,
-        val hugeCount: Long,
-        val currency: Float,
-        val hugeCurrency: Double
+        val author: Author
+    )
+    """
+)
+
+val innerTypeAuthor = SourceFile.kotlin(
+    "InnerTypeAuthor.kt",
+    """
+    package io.datalbry.example
+
+    import io.datalbry.precise.api.schema.SchemaAware
+
+    @SchemaAware
+    data class Author(
+        val name: String,
+        val email: String
     )
     """
 )

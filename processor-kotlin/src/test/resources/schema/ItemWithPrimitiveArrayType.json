@@ -1,0 +1,12 @@
+{
+  "types" : [ {
+    "name" : "ItemWithPrimitiveArray",
+    "fields" : [ {
+      "name" : "numbers",
+      "type" : "int",
+      "multiValue" : true,
+      "optional" : false
+    } ],
+    "type" : "DOCUMENT"
+  } ]
+}

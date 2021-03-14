@@ -10,6 +10,7 @@ import io.datalbry.precise.api.schema.type.DocumentType
 import io.datalbry.precise.api.schema.type.EnumType
 import io.datalbry.precise.api.schema.type.Type
 import io.datalbry.precise.api.schema.type.Types
+import io.datalbry.precise.processor.kotlin.extension.*
 
 /**
  * [KSPropertyDeclaration] implementation which searches for [Type]s
@@ -43,13 +44,35 @@ class FindTypesVisitor(private val logger: KSPLogger): KSEmptyVisitor<Unit, Set<
 
     private fun toField(property: KSPropertyDeclaration): Field {
         return Field(
-            property.simpleName.asString(),
-            getType(property)
+            name = property.simpleName.asString(),
+            type = getType(property),
+            multiValue = isMultiValued(property),
+            optional = isOptional(property)
         )
     }
 
+    private fun isOptional(property: KSPropertyDeclaration): Boolean {
+        if (property.isOptional()) return true
+        if (property.isNullable()) return true
+        return false
+    }
+
+    private fun isMultiValued(property: KSPropertyDeclaration): Boolean {
+        if (property.isArray()) return true
+        if (property.isPrimitiveArray()) return true
+        return false
+    }
+
     private fun getType(property: KSPropertyDeclaration): String {
-        val name = property.type.toString()
+
+        val name = when {
+            property.isArray() -> property.getInnerType().simpleName.asString()
+            property.isPrimitiveArray() -> property.getInnerTypeNameOfPrimitiveArray()
+            property.isOptional() -> property.getInnerType().simpleName.asString()
+            property.isNullable() -> property.type.resolve().declaration.simpleName.asString()
+            else -> property.type.toString()
+        }
+
         return if (isBasicFieldType(name)) {
             sanitizeBasicFieldTypeName(name)
         } else {
@@ -65,3 +88,5 @@ class FindTypesVisitor(private val logger: KSPLogger): KSEmptyVisitor<Unit, Set<
         return name.toLowerCase()
     }
 }
+
+

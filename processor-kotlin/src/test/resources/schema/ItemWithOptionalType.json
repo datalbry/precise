@@ -1,6 +1,6 @@
 {
   "types" : [ {
-    "name" : "ItemWithNullableType",
+    "name" : "ItemWithOptionalType",
     "fields" : [ {
       "name" : "name",
       "type" : "string",
