@@ -97,5 +97,3 @@ class FindTypesVisitor(
         return name.toLowerCase()
     }
 }
-
-
