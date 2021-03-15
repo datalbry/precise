@@ -34,7 +34,7 @@ enum class BasicFieldTypes(val id: String) {
     DOUBLE("double"),
 
     /**
-     * sequence of 8-bit unsigned bytes
+     * 8-bit unsigned byte
      */
     BYTE("byte"),
 
