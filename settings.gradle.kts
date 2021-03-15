@@ -7,6 +7,10 @@ pluginManagement {
     }
 }
 
+includeBuild(
+    "gradle/convention"
+)
+
 include(
     "api",
     "processor-kotlin"

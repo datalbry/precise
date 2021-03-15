@@ -1,3 +1,4 @@
 plugins {
-    kotlin("jvm") version "1.4.31"
+    id("precise.kotlin")
+    id("precise.publish-maven-central")
 }

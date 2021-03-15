@@ -1,13 +1,6 @@
 plugins {
-    kotlin("jvm") version "1.4.31"
-}
-
-repositories {
-    google()
-}
-
-tasks.withType<Test> {
-    useJUnitPlatform()
+    id("precise.kotlin")
+    id("precise.publish-maven-central")
 }
 
 dependencies {
@@ -15,7 +8,6 @@ dependencies {
     val junit5Version = "5.7.1"
 
     api(project(":api"))
-    implementation(kotlin("stdlib"))
 
     implementation("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
