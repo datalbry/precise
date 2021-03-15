@@ -2,14 +2,12 @@ plugins {
     idea
 }
 
-group = "io.datalbry"
-version = "1.0.0-SNAPSHOT"
-
+group = "io.datalbry.precise"
+version = "0.0.1"
 
 subprojects {
 
     repositories {
         mavenCentral()
     }
-
 }
