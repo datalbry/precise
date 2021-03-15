@@ -1,0 +1,12 @@
+{
+  "types" : [ {
+    "name" : "ItemWithOptionalType",
+    "fields" : [ {
+      "name" : "name",
+      "type" : "string",
+      "multiValue" : false,
+      "optional" : true
+    } ],
+    "type" : "DOCUMENT"
+  } ]
+}

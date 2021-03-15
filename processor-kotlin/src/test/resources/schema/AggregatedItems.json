@@ -1,0 +1,30 @@
+{
+  "types" : [ {
+    "name" : "ItemWithOptionalType",
+    "fields" : [ {
+      "name" : "name",
+      "type" : "string",
+      "multiValue" : false,
+      "optional" : true
+    } ],
+    "type" : "DOCUMENT"
+  }, {
+    "name" : "ItemWithStringArray",
+    "fields" : [ {
+      "name" : "names",
+      "type" : "string",
+      "multiValue" : true,
+      "optional" : false
+    } ],
+    "type" : "DOCUMENT"
+  }, {
+    "name" : "SimpleItem",
+    "fields" : [ {
+      "name" : "name",
+      "type" : "string",
+      "multiValue" : false,
+      "optional" : false
+    } ],
+    "type" : "DOCUMENT"
+  } ]
+}

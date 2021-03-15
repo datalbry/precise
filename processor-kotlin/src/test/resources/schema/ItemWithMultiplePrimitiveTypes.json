@@ -1,0 +1,32 @@
+{
+  "types" : [ {
+    "name" : "ItemWithMultiplePrimitiveTypes",
+    "fields" : [ {
+      "name" : "name",
+      "type" : "string",
+      "multiValue" : false,
+      "optional" : false
+    }, {
+      "name" : "count",
+      "type" : "int",
+      "multiValue" : false,
+      "optional" : false
+    }, {
+      "name" : "hugeCount",
+      "type" : "long",
+      "multiValue" : false,
+      "optional" : false
+    }, {
+      "name" : "currency",
+      "type" : "float",
+      "multiValue" : false,
+      "optional" : false
+    }, {
+      "name" : "hugeCurrency",
+      "type" : "double",
+      "multiValue" : false,
+      "optional" : false
+    } ],
+    "type" : "DOCUMENT"
+  } ]
+}

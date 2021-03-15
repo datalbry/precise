@@ -1,0 +1,12 @@
+{
+  "types" : [ {
+    "name" : "ItemWithNameList",
+    "fields" : [ {
+      "name" : "names",
+      "type" : "string",
+      "multiValue" : true,
+      "optional" : false
+    } ],
+    "type" : "DOCUMENT"
+  } ]
+}
