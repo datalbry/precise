@@ -16,14 +16,39 @@ signing {
     sign(configurations.archives.get())
 }
 
+group = "io.datalbry.precise"
+version = "0.0.1"
+
+signing {
+    sign(configurations.archives.get())
+}
+
 publishing {
     publications {
         repositories {
             maven {
-                url = uri("https://s01.oss.sonatype.org")
+                name = "MavenCentral"
+                url = if (project.rootProject.version.toString().endsWith("SNAPSHOT")) {
+                    uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+                } else {
+                    uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+                }
+                credentials {
+                    username = project.findProperty("maven.central.username") as String
+                    password = project.findProperty("maven.central.password") as String
+                }
             }
         }
-        create<MavenPublication>("mavenJava") {
+        create<MavenPublication>("jar") {
+            from(components["java"])
+            versionMapping {
+                usage("java-api") {
+                    fromResolutionOf("runtimeClasspath")
+                }
+                usage("java-runtime") {
+                    fromResolutionResult()
+                }
+            }
             pom {
                 name.set("Precise - ${project.name}")
                 description.set("Precise is a easy to use schema framework")
