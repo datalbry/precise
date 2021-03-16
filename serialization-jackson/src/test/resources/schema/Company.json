@@ -1,0 +1,22 @@
+{
+  "types" : [ {
+    "name" : "Company",
+    "fields" : [ {
+      "name" : "name",
+      "type" : "string",
+      "multiValue" : false,
+      "optional" : false
+    }, {
+      "name" : "homepage",
+      "type" : "string",
+      "multiValue" : false,
+      "optional" : false
+    }, {
+      "name" : "location",
+      "type" : "string",
+      "multiValue" : false,
+      "optional" : false
+    } ],
+    "type" : "DOCUMENT"
+  } ]
+}

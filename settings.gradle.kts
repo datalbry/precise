@@ -13,5 +13,7 @@ includeBuild(
 
 include(
     "api",
-    "processor-kotlin"
+    "processor-kotlin",
+    "validation",
+    "serialization-jackson"
 )
