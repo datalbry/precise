@@ -26,6 +26,7 @@ class GenericDocumentDeserializer(
 )
     : StdDeserializer<Document>(Document::class.java)
 {
+
     override fun deserialize(parser: JsonParser, ctxt: DeserializationContext): Document {
         val node = parser.codec.readTree<JsonNode>(parser)
         val type = node.get("type").asText()
