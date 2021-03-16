@@ -1,0 +1,46 @@
+{
+  "types" : [ {
+    "name" : "Book",
+    "fields" : [ {
+      "name" : "title",
+      "type" : "string",
+      "multiValue" : false,
+      "optional" : false
+    }, {
+      "name" : "description",
+      "type" : "string",
+      "multiValue" : false,
+      "optional" : false
+    }, {
+      "name" : "label",
+      "type" : "string",
+      "multiValue" : true,
+      "optional" : false
+    },{
+      "name" : "author",
+      "type" : "Person",
+      "multiValue" : false,
+      "optional" : false
+    }, {
+      "name" : "co-authors",
+      "type" : "Person",
+      "multiValue" : true,
+      "optional" : false
+    } ],
+    "type" : "DOCUMENT"
+  }, {
+    "name" : "Person",
+    "fields" : [ {
+      "name" : "name",
+      "type" : "string",
+      "multiValue" : false,
+      "optional" : false
+    }, {
+      "name" : "email",
+      "type" : "string",
+      "multiValue" : false,
+      "optional" : false
+    } ],
+    "type" : "DOCUMENT"
+  } ]
+}

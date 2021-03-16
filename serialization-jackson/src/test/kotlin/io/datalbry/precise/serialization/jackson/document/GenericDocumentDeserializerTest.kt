@@ -54,6 +54,26 @@ internal class GenericDocumentDeserializerTest {
         assertValueType<String>(company.get("location"))
     }
 
+    @Test
+    fun deserialize_documentWithMultiValueFields_multiValueFieldAreDeserializedCorrectly() {
+        val schema = getTestSchema<GenericDocumentDeserializer>("Book.json")
+        val json = getTestDocument<GenericDocumentDeserializer>("Book.json")
+        val jackson = getJacksonMapper(schema)
+
+        val document: Document = jackson.readValue(json)
+        val presentKeys = document.getKeys()
+        presentKeys.contains("title")
+        presentKeys.contains("description")
+        presentKeys.contains("author")
+        presentKeys.contains("label")
+
+        assertValueType<String>(document.get("title"))
+        assertValueType<String>(document.get("description"))
+        assertValueType<Collection<String>>(document.get("label"))
+        assertValueType<Record>(document.get("author"))
+        assertValueType<Collection<Record>>(document.get("co-authors"))
+    }
+
     private fun getJacksonMapper(schema: Schema): ObjectMapper {
         val jackson = jacksonObjectMapper()
         val module = SimpleModule().addDeserializer(Document::class.java, GenericDocumentDeserializer(schema))
