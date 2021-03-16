@@ -21,7 +21,7 @@ interface Record {
     /**
      * Get all present field keys of the record
      *
-     * Note: Optional field keys might missing, depending if they are present in the record, or not
+     * Note: Optional field keys might be missing, depending on whether they are present in the record, or not
      *
      * @return Set of all keys
      */
