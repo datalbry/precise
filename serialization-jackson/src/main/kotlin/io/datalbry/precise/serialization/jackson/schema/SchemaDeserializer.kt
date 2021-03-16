@@ -9,7 +9,7 @@ import io.datalbry.precise.api.schema.field.Field
 import io.datalbry.precise.api.schema.type.DocumentType
 import io.datalbry.precise.api.schema.type.EnumType
 import io.datalbry.precise.api.schema.type.Type
-import io.datalbry.precise.serialization.extension.mapValues
+import io.datalbry.precise.serialization.jackson.extension.mapValues
 
 class SchemaDeserializer: StdDeserializer<Schema>(Schema::class.java) {
 

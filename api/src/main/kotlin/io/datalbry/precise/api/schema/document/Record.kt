@@ -18,4 +18,13 @@ interface Record {
      */
     fun get(key: String): Field<*>
 
+    /**
+     * Get all present field keys of the record
+     *
+     * Note: Optional field keys might missing, depending if they are present in the record, or not
+     *
+     * @return Set of all keys
+     */
+    fun getKeys(): Set<String>
+
 }

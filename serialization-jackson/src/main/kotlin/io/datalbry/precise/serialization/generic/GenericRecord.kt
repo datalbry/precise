@@ -9,4 +9,6 @@ class GenericRecord(
 
     override fun get(key: String) = fields.first { it.name == key }
 
+    override fun getKeys() = fields.map { it.name }.toSet()
+
 }

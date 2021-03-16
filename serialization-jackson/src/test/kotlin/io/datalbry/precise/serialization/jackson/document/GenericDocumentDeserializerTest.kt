@@ -6,6 +6,8 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import io.datalbry.precise.api.schema.Schema
 import io.datalbry.precise.api.schema.document.Document
+import io.datalbry.precise.api.schema.document.Record
+import io.datalbry.precise.serialization.jackson.document.assertion.assertValueType
 import io.datalbry.precise.serialization.jackson.document.util.getTestDocument
 import io.datalbry.precise.serialization.jackson.document.util.getTestSchema
 import org.junit.jupiter.api.Assertions.*
@@ -16,6 +18,18 @@ internal class GenericDocumentDeserializerTest {
     @Test
     fun deserialize_simpleDocument_allFieldsArePresent() {
         val schema = getTestSchema<GenericDocumentDeserializer>("Company.json")
+        val json = getTestDocument<GenericDocumentDeserializer>("Company.json")
+        val jackson = getJacksonMapper(schema)
+
+        val document: Document = jackson.readValue(json)
+        val presentKeys = document.getKeys()
+        presentKeys.contains("name")
+        presentKeys.contains("homepage")
+        presentKeys.contains("location")
+
+        assertValueType<String>(document.get("name"))
+        assertValueType<String>(document.get("homepage"))
+        assertValueType<String>(document.get("location"))
     }
 
     @Test
@@ -25,10 +39,20 @@ internal class GenericDocumentDeserializerTest {
         val jackson = getJacksonMapper(schema)
 
         val document: Document = jackson.readValue(json)
-        TODO()
+        val presentKeys = document.getKeys()
+        presentKeys.contains("name")
+        presentKeys.contains("lastName")
+        presentKeys.contains("company")
+
+        assertValueType<String>(document.get("name"))
+        assertValueType<String>(document.get("lastName"))
+        assertValueType<Record>(document.get("company"))
+
+        val company = document.get("company").value as Record
+        assertValueType<String>(company.get("name"))
+        assertValueType<String>(company.get("homepage"))
+        assertValueType<String>(company.get("location"))
     }
-
-
 
     private fun getJacksonMapper(schema: Schema): ObjectMapper {
         val jackson = jacksonObjectMapper()
