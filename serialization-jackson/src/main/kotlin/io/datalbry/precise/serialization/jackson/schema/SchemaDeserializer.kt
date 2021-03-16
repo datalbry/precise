@@ -23,7 +23,7 @@ class SchemaDeserializer: StdDeserializer<Schema>(Schema::class.java) {
         return when (node.get("type").asText()) {
             "DOCUMENT" -> toDocumentType(node)
             "ENUM" -> toEnumType(node)
-            else -> throw IllegalArgumentException("Types may only be DOCUMENT or ENUM")
+            else -> throw IllegalArgumentException("Type may only be DOCUMENT or ENUM")
         }
     }
 

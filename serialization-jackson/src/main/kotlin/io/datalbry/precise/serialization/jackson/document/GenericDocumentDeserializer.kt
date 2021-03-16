@@ -32,7 +32,7 @@ class GenericDocumentDeserializer(
         val type = node.get("type").asText()
 
         val typeSchema = schema.typeSchema(type)
-        if (typeSchema !is DocumentType) throw IllegalArgumentException("Only documents can be deserialized, check the schema if the Type[$type] is declared as DOCUMENT")
+        if (typeSchema !is DocumentType) throw IllegalArgumentException("Only documents can be deserialized, check the schema whether the Type[$type] is declared as DOCUMENT or not")
         val fields = getDocumentFields(schema, typeSchema, node.get("fields"))
 
         return GenericDocument(type, fields)
