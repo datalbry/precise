@@ -27,4 +27,11 @@ interface Record {
      */
     fun getKeys(): Set<String>
 
+    /**
+     * Get all present entries of the record
+     *
+     * @return all entries of the record
+     */
+    fun getFields(): Set<Field<*>>
+
 }

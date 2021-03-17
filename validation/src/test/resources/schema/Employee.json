@@ -1,0 +1,41 @@
+{
+  "types" : [ {
+    "name" : "Employee",
+    "fields" : [ {
+      "name" : "name",
+      "type" : "string",
+      "multiValue" : false,
+      "optional" : false
+    }, {
+      "name" : "lastName",
+      "type" : "string",
+      "multiValue" : false,
+      "optional" : false
+    }, {
+      "name" : "company",
+      "type" : "Company",
+      "multiValue" : false,
+      "optional" : false
+    } ],
+    "type" : "DOCUMENT"
+  }, {
+    "name" : "Company",
+    "fields" : [ {
+      "name" : "name",
+      "type" : "string",
+      "multiValue" : false,
+      "optional" : false
+    }, {
+      "name" : "homepage",
+      "type" : "string",
+      "multiValue" : false,
+      "optional" : false
+    }, {
+      "name" : "location",
+      "type" : "string",
+      "multiValue" : false,
+      "optional" : false
+    } ],
+    "type" : "DOCUMENT"
+  } ]
+}

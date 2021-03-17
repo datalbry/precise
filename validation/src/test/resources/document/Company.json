@@ -1,0 +1,8 @@
+{
+  "type": "Company",
+  "fields": {
+    "name": "DataLbry",
+    "homepage": "datalbry.io",
+    "location": "de_DE"
+  }
+}

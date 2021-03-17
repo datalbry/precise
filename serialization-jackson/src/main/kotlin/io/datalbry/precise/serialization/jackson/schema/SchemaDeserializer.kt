@@ -11,6 +11,11 @@ import io.datalbry.precise.api.schema.type.EnumType
 import io.datalbry.precise.api.schema.type.Type
 import io.datalbry.precise.serialization.jackson.extension.mapValues
 
+/**
+ * Jackson specific [StdDeserializer] for [Schema] deserialization
+ *
+ * @author timo gruen - 2021-03-16
+ */
 class SchemaDeserializer: StdDeserializer<Schema>(Schema::class.java) {
 
     override fun deserialize(parser: JsonParser, ctxt: DeserializationContext): Schema {

@@ -9,9 +9,9 @@ import io.datalbry.precise.api.schema.document.Document
 import io.datalbry.precise.api.schema.document.Field
 import io.datalbry.precise.api.schema.field.BasicFieldType
 import io.datalbry.precise.api.schema.type.DocumentType
-import io.datalbry.precise.serialization.generic.GenericDocument
-import io.datalbry.precise.serialization.generic.GenericField
-import io.datalbry.precise.serialization.generic.GenericRecord
+import io.datalbry.precise.api.schema.document.generic.GenericDocument
+import io.datalbry.precise.api.schema.document.generic.GenericField
+import io.datalbry.precise.api.schema.document.generic.GenericRecord
 import io.datalbry.precise.serialization.jackson.extension.*
 import kotlin.collections.Map.Entry
 import io.datalbry.precise.api.schema.field.Field as FieldSchema

@@ -1,4 +1,4 @@
-package io.datalbry.precise.serialization.generic
+package io.datalbry.precise.api.schema.document.generic
 
 import io.datalbry.precise.api.schema.document.Field
 
