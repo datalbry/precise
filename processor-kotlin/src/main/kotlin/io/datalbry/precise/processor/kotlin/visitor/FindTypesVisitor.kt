@@ -5,7 +5,7 @@ import com.google.devtools.ksp.processing.Resolver
 import com.google.devtools.ksp.symbol.KSNode
 import com.google.devtools.ksp.symbol.KSPropertyDeclaration
 import com.google.devtools.ksp.visitor.KSEmptyVisitor
-import io.datalbry.precise.api.schema.field.BasicFieldTypes
+import io.datalbry.precise.api.schema.field.BasicFieldType
 import io.datalbry.precise.api.schema.field.Field
 import io.datalbry.precise.api.schema.type.DocumentType
 import io.datalbry.precise.api.schema.type.EnumType
@@ -88,7 +88,7 @@ class FindTypesVisitor(
     }
 
     private fun isBasicFieldType(name: String): Boolean {
-        return BasicFieldTypes.values().map { it.id }.contains(sanitizeBasicFieldTypeName(name))
+        return BasicFieldType.values().map { it.id }.contains(sanitizeBasicFieldTypeName(name))
     }
 
     private fun sanitizeBasicFieldTypeName(name: String): String {

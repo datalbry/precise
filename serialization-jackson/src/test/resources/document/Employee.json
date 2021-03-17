@@ -1,0 +1,12 @@
+{
+  "type": "Employee",
+  "fields": {
+    "name": "timo",
+    "lastName": "gruen",
+    "company": {
+      "name": "DataLbry",
+      "homepage": "datalbry.io",
+      "location": "de_DE"
+    }
+  }
+}

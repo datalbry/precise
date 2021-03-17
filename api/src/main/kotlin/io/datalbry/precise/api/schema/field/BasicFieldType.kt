@@ -1,13 +1,13 @@
 package io.datalbry.precise.api.schema.field
 
 /**
- * [BasicFieldTypes] contains any "primitive" types supported by Precise.
+ * [BasicFieldType] contains any "primitive" types supported by Precise.
  *
  * @param id of the type. Used by [Field.type]
  *
  * @author timo gruen - 2021-03-09
  */
-enum class BasicFieldTypes(val id: String) {
+enum class BasicFieldType(val id: String) {
     /**
      * no value
      */

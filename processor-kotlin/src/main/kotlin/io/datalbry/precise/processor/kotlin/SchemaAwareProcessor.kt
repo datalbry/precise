@@ -4,7 +4,7 @@ import com.google.devtools.ksp.processing.*
 import com.google.devtools.ksp.symbol.KSAnnotated
 import io.datalbry.precise.api.schema.Schema
 import io.datalbry.precise.api.schema.SchemaAware
-import io.datalbry.precise.api.schema.field.BasicFieldTypes
+import io.datalbry.precise.api.schema.field.BasicFieldType
 import io.datalbry.precise.api.schema.type.DocumentType
 import io.datalbry.precise.api.schema.type.Type
 import io.datalbry.precise.processor.kotlin.deserializer.JacksonSchemaDeserializer
@@ -74,7 +74,7 @@ class SchemaAwareProcessor: SymbolProcessor {
 
     private fun containsOnlyValidFields(type: DocumentType, types: List<String>): Boolean {
         return type.fields.all { field ->
-            BasicFieldTypes
+            BasicFieldType
                 .values()
                 .map { it.id }
                 .contains(field.type) || types.contains(field.type)
