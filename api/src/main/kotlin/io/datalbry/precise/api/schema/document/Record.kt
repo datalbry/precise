@@ -16,7 +16,7 @@ interface Record {
      *
      * @return field with matching [key]
      */
-    fun get(key: String): Field<*>
+    operator fun get(key: String): Field<*>
 
     /**
      * Get all present field keys of the record
@@ -27,4 +27,10 @@ interface Record {
      */
     fun getKeys(): Set<String>
 
+    /**
+     * Get all present entries of the record
+     *
+     * @return all entries of the record
+     */
+    fun getFields(): Set<Field<*>>
 }

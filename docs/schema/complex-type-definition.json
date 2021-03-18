@@ -1,16 +1,17 @@
 {
-  "type": "document",
+  "type": "DOCUMENT",
   "name": "space",
   "fields": [
     {
       "name": "name",
-      "optional": "false",
-      "type": "string",
-      "default": "Unknown"
+      "optional": false,
+      "multiValue": false,
+      "type": "string"
     },
     {
-      "name": "name",
-      "optional": "false",
+      "name": "click_url",
+      "optional": false,
+      "multiValue": false,
       "type": "string"
     }
   ]

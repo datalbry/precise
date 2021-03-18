@@ -1,0 +1,62 @@
+= Precise - Serialization Jackson
+
+This submodule is a jackson specific implementation for serialization.
+
+== Usage
+
+Keep in mind that Precise always requires a Schema to work.
+The primarily reason is, Precise does not send any type information with each request,
+but stores it on both - client and server side.
+On JVM it works without any class generation and is using a generic approach to handle types.
+
+NOTE: The following examples will not contain the API on how to derive a Schema.
+If you are not aware on how to derive a Schema with Precise, please checkout the documentation link:../README.adoc[here].
+
+The module can easily be used in three different ways:
+
+=== PreciseMapper
+
+One can use the Precise specific ObjectMapper which comes with preconfigured modules and features.
+This can primarily being used when using a DI framework, such as Spring (Boot).
+If you are building a Spring (Boot), checkout the <<PreciseModule>> section
+
+[source,kotlin]
+----
+fun deserialize(schema: Schema, json: File): Document {
+    val jackson = PreciseMapper(schema)
+    return jackosn.readValue<Document>(schema, json)
+}
+----
+
+=== PreciseModule
+
+The precise module takes care of deserializing / serializing Precise Documents.
+In contrast to the <<PreciseMapper>> one can easily add the Module to an existing jackson instance.
+
+[source,kotlin]
+----
+fun preciseObjectMapper(schema: Schema): PreciseMapper {
+    return PreciseMapper(schema)
+}
+
+fun deserialize(schema: Schema, json: File): Document {
+    val jackson = preciseObjectMapper(schema)
+    return jackson.readValue<Document>(schema, json)
+}
+----
+
+== DocumentDeserializer
+
+The DocumentDeserializer is a Precise specific interface and agnostic to use.
+It's primarily meant to use when not caring about the actual underlying framework, such as Jackson, Gson or others.
+The interface provides some non-jackson specific functions.
+
+[source,kotlin]
+----
+val deserializer = JacksonDocumentDeserializer()
+
+fun deserialize(schema: Schema, json: File): Document {
+    return deserializer.read(schema, json)
+}
+----
+

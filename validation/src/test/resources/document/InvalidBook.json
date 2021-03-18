@@ -1,0 +1,16 @@
+{
+  "type": "Book",
+  "fields": {
+    "title": "Oh, maxi big da Force...",
+    "description": "Some really nice Jar Jar Binks book",
+    "author": {
+      "name": "timo",
+      "email": "no-reply@datalbry.io"
+    },
+    "label": [ "Fantasy", "Romance", "Anakin" ],
+    "co-authors": {
+      "name": "alice",
+      "email": "alice@datalbry.io"
+    }
+  }
+}

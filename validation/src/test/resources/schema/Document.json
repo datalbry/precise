@@ -1,0 +1,17 @@
+{
+  "types" : [ {
+    "name" : "Document",
+    "fields" : [ {
+      "name" : "name",
+      "type" : "string",
+      "multiValue" : false,
+      "optional" : false
+    }, {
+      "name" : "url",
+      "type" : "string",
+      "multiValue" : false,
+      "optional" : true
+    } ],
+    "type" : "DOCUMENT"
+  } ]
+}
