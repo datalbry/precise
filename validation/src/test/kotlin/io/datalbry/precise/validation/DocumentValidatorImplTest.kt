@@ -4,6 +4,7 @@ import io.datalbry.precise.serialization.jackson.JacksonDocumentDeserializer
 import io.datalbry.precise.validation.util.getTestDocument
 import io.datalbry.precise.validation.util.getTestSchema
 import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 internal class DocumentValidatorImplTest {
@@ -39,7 +40,9 @@ internal class DocumentValidatorImplTest {
         assertTrue(validator.isValid(schema, json))
     }
 
+
     @Test
+    @Disabled("BUG Ticket[https://datalbry.jetbrains.space/p/kc/issues/17]")
     fun isValid_documentWithMissingOptionalField_isValid() {
         val schema = getTestSchema<DocumentValidatorImplTest>("Document.json")
         val json = getTestDocument<DocumentValidatorImplTest>("DocumentWithUnknownFields.json")
