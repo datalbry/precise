@@ -33,5 +33,4 @@ interface Record {
      * @return all entries of the record
      */
     fun getFields(): Set<Field<*>>
-
 }
