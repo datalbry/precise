@@ -1,4 +1,4 @@
-package io.datalbry.precise.serialization.jackson.document
+package io.datalbry.precise.serialization.jackson
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
@@ -6,6 +6,7 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import io.datalbry.precise.api.schema.Schema
 import io.datalbry.precise.api.schema.document.Document
 import io.datalbry.precise.api.serialization.DocumentDeserializer
+import io.datalbry.precise.serialization.jackson.PreciseModule
 import java.io.File
 
 /**
@@ -21,17 +22,17 @@ import java.io.File
  */
 class JacksonDocumentDeserializer: DocumentDeserializer {
 
-    override fun deserialize(schema: Schema, file: File): Document {
+    override fun read(schema: Schema, file: File): Document {
         val jackson = preconfiguredJackson(schema)
         return jackson.readValue(file)
     }
 
-    override fun deserialize(schema: Schema, json: String): Document {
+    override fun read(schema: Schema, json: String): Document {
         val jackson = preconfiguredJackson(schema)
         return jackson.readValue(json)
     }
 
-    override fun deserialize(schema: Schema, rawJson: ByteArray): Document {
+    override fun read(schema: Schema, rawJson: ByteArray): Document {
         val jackson = preconfiguredJackson(schema)
         return jackson.readValue(rawJson)
     }

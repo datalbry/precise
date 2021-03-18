@@ -22,7 +22,7 @@ interface DocumentDeserializer {
      *
      * @return deserialized [Document]
      */
-    fun deserialize(schema: Schema, file: File): Document
+    fun read(schema: Schema, file: File): Document
 
     /**
      * Deserialize a raw String to a [Document]
@@ -32,7 +32,7 @@ interface DocumentDeserializer {
      *
      * @return deserialized [Document]
      */
-    fun deserialize(schema: Schema, json: String): Document
+    fun read(schema: Schema, json: String): Document
 
     /**
      * Deserialize a raw ByteArray to a [Document]
@@ -42,6 +42,6 @@ interface DocumentDeserializer {
      *
      * @return deserialized [Document]
      */
-    fun deserialize(schema: Schema, rawJson: ByteArray): Document
+    fun read(schema: Schema, rawJson: ByteArray): Document
 
 }

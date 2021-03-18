@@ -1,9 +1,10 @@
-package io.datalbry.precise.serialization.jackson.document
+package io.datalbry.precise.serialization.jackson
 
 import com.fasterxml.jackson.core.Version
 import com.fasterxml.jackson.databind.module.SimpleModule
 import io.datalbry.precise.api.schema.Schema
 import io.datalbry.precise.api.schema.document.Document
+import io.datalbry.precise.serialization.jackson.document.GenericDocumentDeserializer
 
 private fun version() = Version(1, 0, 0, null, "io.datalbry.precise", "serialization-jackson")
 

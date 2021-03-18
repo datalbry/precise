@@ -1,6 +1,6 @@
 package io.datalbry.precise.validation
 
-import io.datalbry.precise.serialization.jackson.document.JacksonDocumentDeserializer
+import io.datalbry.precise.serialization.jackson.JacksonDocumentDeserializer
 import io.datalbry.precise.validation.util.getTestDocument
 import io.datalbry.precise.validation.util.getTestSchema
 import org.junit.jupiter.api.Assertions.*

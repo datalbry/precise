@@ -26,7 +26,7 @@ class DocumentValidatorImpl(private val deserializer: DocumentDeserializer): Doc
 
     override fun isValid(schema: Schema, file: File): Boolean {
         return try {
-            val document = deserializer.deserialize(schema, file)
+            val document = deserializer.read(schema, file)
             isValid(schema, document)
         } catch (e: Exception) { false }
     }
