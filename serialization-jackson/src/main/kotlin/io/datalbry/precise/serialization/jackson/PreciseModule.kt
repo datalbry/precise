@@ -4,7 +4,10 @@ import com.fasterxml.jackson.core.Version
 import com.fasterxml.jackson.databind.module.SimpleModule
 import io.datalbry.precise.api.schema.Schema
 import io.datalbry.precise.api.schema.document.Document
-import io.datalbry.precise.serialization.jackson.document.GenericDocumentDeserializer
+import io.datalbry.precise.api.schema.document.Record
+import io.datalbry.precise.serialization.jackson.deserializer.GenericDocumentDeserializer
+import io.datalbry.precise.serialization.jackson.deserializer.GenericRecordDeserializer
+import io.datalbry.precise.serialization.jackson.deserializer.SchemaDeserializer
 
 private fun version() = Version(1, 0, 0, null, "io.datalbry.precise", "serialization-jackson")
 
@@ -22,8 +25,12 @@ private fun version() = Version(1, 0, 0, null, "io.datalbry.precise", "serializa
 class PreciseModule(schema: Schema): SimpleModule("Precise", version()) {
 
     init {
-        val deserializer = GenericDocumentDeserializer(schema)
-        this.addDeserializer(Document::class.java, deserializer)
+        val documentDeserializer = GenericDocumentDeserializer(schema)
+        val recordDeserializer = GenericRecordDeserializer(schema)
+        val schemaDeserializer = SchemaDeserializer()
+        this.addDeserializer(Document::class.java, documentDeserializer)
+        this.addDeserializer(Record::class.java, recordDeserializer)
+        this.addDeserializer(Schema::class.java, schemaDeserializer)
     }
 
 }

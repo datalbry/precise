@@ -51,6 +51,12 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+
 //Function to calculate unique archive names,
 //since we are not prefixing all of our submodules with the parent hierarchy.
 fun getArchiveName(project: Project): String {

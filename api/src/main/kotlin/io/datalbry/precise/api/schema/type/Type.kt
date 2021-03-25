@@ -6,7 +6,7 @@ package io.datalbry.precise.api.schema.type
  * [Type] might only be internally extended and not externally
  *
  * Currently supported:
- * - [DocumentType]
+ * - [RecordType]
  * - [EnumType]
  *
  * !!! IMPORTANT !!!

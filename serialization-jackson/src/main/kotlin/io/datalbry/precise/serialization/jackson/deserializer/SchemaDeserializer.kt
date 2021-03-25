@@ -1,4 +1,4 @@
-package io.datalbry.precise.serialization.jackson.schema
+package io.datalbry.precise.serialization.jackson.deserializer
 
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.DeserializationContext
@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer
 import io.datalbry.precise.api.schema.Schema
 import io.datalbry.precise.api.schema.field.Field
-import io.datalbry.precise.api.schema.type.DocumentType
+import io.datalbry.precise.api.schema.type.RecordType
 import io.datalbry.precise.api.schema.type.EnumType
 import io.datalbry.precise.api.schema.type.Type
 import io.datalbry.precise.serialization.jackson.extension.mapValues
@@ -35,7 +35,7 @@ class SchemaDeserializer: StdDeserializer<Schema>(Schema::class.java) {
     private fun toDocumentType(node: JsonNode): Type {
         val name = node.get("name").asText()
         val fields = node.mapValues("fields", this::toDocumentField)
-        return DocumentType(name, fields)
+        return RecordType(name, fields)
     }
 
     private fun toDocumentField(node: JsonNode): Field {

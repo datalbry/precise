@@ -1,18 +1,33 @@
 {
-  "type": "DOCUMENT",
-  "name": "space",
-  "fields": [
+  "types": [
     {
-      "name": "name",
-      "optional": false,
-      "multiValue": false,
-      "type": "string"
+      "type": "RECORD",
+      "name": "space",
+      "fields": [
+        {
+          "name": "name",
+          "optional": false,
+          "multiValue": false,
+          "type": "string"
+        },
+        {
+          "name": "click_url",
+          "optional": false,
+          "multiValue": false,
+          "type": "string"
+        },
+        {
+          "name": "current_status",
+          "optional": false,
+          "multiValue": false,
+          "type": "status"
+        }
+      ]
     },
     {
-      "name": "click_url",
-      "optional": false,
-      "multiValue": false,
-      "type": "string"
+      "type": "ENUM",
+      "name": "status",
+      "values": ["running", "paused", "aborted"]
     }
   ]
 }

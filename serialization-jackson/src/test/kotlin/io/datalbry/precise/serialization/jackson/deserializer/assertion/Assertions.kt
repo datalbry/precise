@@ -1,4 +1,4 @@
-package io.datalbry.precise.serialization.jackson.document.assertion
+package io.datalbry.precise.serialization.jackson.deserializer.assertion
 
 import io.datalbry.precise.api.schema.document.Field
 import org.junit.jupiter.api.Assertions

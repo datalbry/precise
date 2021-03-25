@@ -1,7 +1,7 @@
 package io.datalbry.precise.validation.extensions
 
 import io.datalbry.precise.api.schema.Schema
-import io.datalbry.precise.api.schema.type.DocumentType
+import io.datalbry.precise.api.schema.type.RecordType
 import io.datalbry.precise.api.schema.type.EnumType
 import io.datalbry.precise.api.schema.type.Types
 
@@ -13,13 +13,13 @@ import io.datalbry.precise.api.schema.type.Types
 fun Schema.isDefinedEnumType(type: String) = this.types.firstOrNull { it.name == type }?.type == Types.ENUM
 
 /**
- * Gets the [DocumentType] of the [type]
+ * Gets the [RecordType] of the [type]
  *
- * @throws NoSuchElementException if the [type] has no corresponding [DocumentType] present in the [Schema]
+ * @throws NoSuchElementException if the [type] has no corresponding [RecordType] present in the [Schema]
  *
- * @return [DocumentType] of the [type]
+ * @return [RecordType] of the [type]
  */
-fun Schema.getDocumentType(type: String) = this.types.first { it.name == type } as DocumentType
+fun Schema.getDocumentType(type: String) = this.types.first { it.name == type } as RecordType
 
 /**
  * Gets the [EnumType] of the [type]

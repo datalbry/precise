@@ -4,6 +4,7 @@ import io.datalbry.precise.api.schema.document.Field
 import io.datalbry.precise.api.schema.document.Record
 
 class GenericRecord(
+    override val type: String,
     private val fields: Set<Field<*>>
 ): Record {
 

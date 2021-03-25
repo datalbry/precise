@@ -10,6 +10,13 @@ package io.datalbry.precise.api.schema.document
 interface Record {
 
     /**
+     * Type of the record
+     *
+     * The type has to be defined in the corresponding schema
+     */
+    val type: String
+
+    /**
      * Get a specific field of the record
      *
      * @param key of the field

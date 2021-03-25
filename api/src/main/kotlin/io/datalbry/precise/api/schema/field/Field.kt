@@ -1,7 +1,7 @@
 package io.datalbry.precise.api.schema.field
 
 /**
- * [Field] holds the information about a specific field of an [io.datalbry.precise.api.schema.type.DocumentType]
+ * [Field] holds the information about a specific field of an [io.datalbry.precise.api.schema.type.RecordType]
  *
  * @param name of the field - requires to be unique for the type
  * @param type of the field
