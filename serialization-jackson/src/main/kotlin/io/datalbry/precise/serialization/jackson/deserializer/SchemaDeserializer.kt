@@ -9,6 +9,7 @@ import io.datalbry.precise.api.schema.field.Field
 import io.datalbry.precise.api.schema.type.RecordType
 import io.datalbry.precise.api.schema.type.EnumType
 import io.datalbry.precise.api.schema.type.Type
+import io.datalbry.precise.api.schema.type.Types
 import io.datalbry.precise.serialization.jackson.extension.mapValues
 
 /**
@@ -26,8 +27,8 @@ class SchemaDeserializer: StdDeserializer<Schema>(Schema::class.java) {
 
     private fun toType(node: JsonNode): Type {
         return when (node.get("type").asText()) {
-            "DOCUMENT" -> toDocumentType(node)
-            "ENUM" -> toEnumType(node)
+            Types.RECORD.name -> toDocumentType(node)
+            Types.ENUM.name -> toEnumType(node)
             else -> throw IllegalArgumentException("Type may only be DOCUMENT or ENUM")
         }
     }

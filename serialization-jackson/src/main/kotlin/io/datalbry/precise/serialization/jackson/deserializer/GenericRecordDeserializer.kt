@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer
+import com.fasterxml.jackson.databind.deser.std.StdNodeBasedDeserializer
 import io.datalbry.precise.api.schema.Schema
 import io.datalbry.precise.api.schema.document.Field
 import io.datalbry.precise.api.schema.document.Record
@@ -24,11 +25,10 @@ import io.datalbry.precise.api.schema.field.Field as FieldSchema
 class GenericRecordDeserializer(
     private val schema: Schema
 )
-    : StdDeserializer<Record>(Record::class.java)
+    : StdNodeBasedDeserializer<Record>(Record::class.java)
 {
 
-    override fun deserialize(parser: JsonParser, ctxt: DeserializationContext): Record {
-        val node = parser.codec.readTree<JsonNode>(parser)
+    override fun convert(node: JsonNode, ctxt: DeserializationContext): Record {
         val type = node.get("type").asText()
 
         val typeSchema = schema.typeSchema(type)
