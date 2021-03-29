@@ -17,7 +17,7 @@
       "multiValue" : false,
       "optional" : false
     } ],
-    "type" : "DOCUMENT"
+    "type" : "RECORD"
   }, {
     "name" : "Company",
     "fields" : [ {
@@ -36,6 +36,6 @@
       "multiValue" : false,
       "optional" : false
     } ],
-    "type" : "DOCUMENT"
+    "type" : "RECORD"
   } ]
 }

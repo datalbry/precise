@@ -7,6 +7,6 @@
       "multiValue" : true,
       "optional" : false
     } ],
-    "type" : "DOCUMENT"
+    "type" : "RECORD"
   } ]
 }

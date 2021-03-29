@@ -7,16 +7,17 @@ plugins {
     jacoco
 }
 
-version = "0.0.1-SNAPSHOT"
-group = "io.datalbry.precise"
-
 repositories {
     mavenCentral()
     mavenLocal()
     google()
 }
 
+version = getVersion(project)
+group = "io.datalbry.precise"
+
 dependencies {
+    runtimeOnly("org.jetbrains.kotlin:kotlin-reflect:1.4.21")
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.4.21")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
@@ -36,7 +37,7 @@ tasks.getByName("jacocoTestReport") {
 
 // Prefix all of our jars with the company name
 tasks.withType<AbstractArchiveTask> {
-    archiveBaseName.set("lbrary-${getArchiveName(this.project)}")
+    archiveBaseName.set("datalbry-${getArchiveName(this.project)}")
     archiveVersion.set(this.project.version.toString())
 }
 
@@ -51,14 +52,31 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+// Function to get the version of the archive
+fun getVersion(project: Project): String {
+    var version = project.version as String
+    var parent = project.parent
+    while (parent != null) {
+        version = parent.version as String
+        parent = parent.parent
+    }
+    return version
+}
+
+
 //Function to calculate unique archive names,
 //since we are not prefixing all of our submodules with the parent hierarchy.
 fun getArchiveName(project: Project): String {
     var archiveName = project.name
     var parent = project.parent
     while (parent != null) {
-        archiveName = "${parent.name}-${archiveName}"
-        parent = parent.parent
+        archiveName = "${parent!!.name}-${archiveName}"
+        parent = parent!!.parent
     }
     return archiveName
 }

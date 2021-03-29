@@ -39,7 +39,6 @@ fun isValidBasicType(field: Field, value: Any?): Boolean {
  * @return true if the value has the correct java type, else false
  */
 fun validateBasicType(type: BasicFieldType, value: Any?): Boolean = when (type) {
-    BasicFieldType.NULL -> value is Unit
     BasicFieldType.INT -> value is Int
     BasicFieldType.LONG -> value is Long
     BasicFieldType.FLOAT -> value is Float

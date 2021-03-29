@@ -8,7 +8,7 @@ import io.datalbry.precise.api.schema.Schema
 import io.datalbry.precise.api.schema.document.Document
 import io.datalbry.precise.api.schema.document.Field
 import io.datalbry.precise.api.schema.field.BasicFieldType
-import io.datalbry.precise.api.schema.type.DocumentType
+import io.datalbry.precise.api.schema.type.RecordType
 import io.datalbry.precise.api.schema.document.generic.GenericDocument
 import io.datalbry.precise.api.schema.document.generic.GenericField
 import io.datalbry.precise.api.schema.document.generic.GenericRecord
@@ -30,22 +30,23 @@ class GenericDocumentDeserializer(
     override fun deserialize(parser: JsonParser, ctxt: DeserializationContext): Document {
         val node = parser.codec.readTree<JsonNode>(parser)
         val type = node.get("type").asText()
+        val id = node.get("id").asText()
 
         val typeSchema = schema.typeSchema(type)
-        if (typeSchema !is DocumentType) throw IllegalArgumentException("Only documents can be deserialized, check the schema whether the Type[$type] is declared as DOCUMENT or not")
+        if (typeSchema !is RecordType) throw IllegalArgumentException("Only documents can be deserialized, check the schema whether the Type[$type] is declared as DOCUMENT or not")
         val fields = getDocumentFields(schema, typeSchema, node.get("fields"))
 
-        return GenericDocument(type, fields)
+        return GenericDocument(type, id, fields)
     }
 
-    private fun getDocumentFields(schema: Schema, typeSchema: DocumentType, node: JsonNode): Set<Field<*>> {
+    private fun getDocumentFields(schema: Schema, typeSchema: RecordType, node: JsonNode): Set<Field<*>> {
         return node.fields().asSequence().map {
             val fieldSchema = typeSchema.getFieldSchema(it.key)
             val type = fieldSchema.type
             when {
                 isBasicFieldType(type) -> getBasicField(fieldSchema, it)
-                schema.isDefinedEnumType(type) -> getEnumField(it)
-                schema.isDefinedDocumentType(type) -> getRecordField(schema, fieldSchema, it)
+                schema.isEnumType(type) -> getEnumField(it)
+                schema.isRecordType(type) -> getRecordField(schema, fieldSchema, it)
                 else -> throw IllegalArgumentException("Type[$type] is not defined in the schema, nor well-known")
             }
         }.toSet()
@@ -53,12 +54,12 @@ class GenericDocumentDeserializer(
 
     @Suppress("IMPLICIT_CAST_TO_ANY")
     private fun getRecordField(schema: Schema, type: FieldSchema, entry: Entry<String, JsonNode>): Field<*> {
-        val documentType = schema.getDocumentType(type.type)
+        val recordType = schema.getRecordType(type.type)
         val records = when {
             type.multiValue -> entry.value
-                .mapValues { getDocumentFields(schema, documentType, it) }
-                .map { GenericRecord(it) }
-            else -> GenericRecord(getDocumentFields(schema, documentType, entry.value))
+                .mapValues { getDocumentFields(schema, recordType, it) }
+                .map { GenericRecord(type.name, it) }
+            else -> GenericRecord(type.name, getDocumentFields(schema, recordType, entry.value))
         }
         return GenericField(entry.key, records)
     }
@@ -80,7 +81,6 @@ class GenericDocumentDeserializer(
 
     private fun readValue(type: BasicFieldType, node: JsonNode): Any? {
         return when (type) {
-            BasicFieldType.NULL -> null
             BasicFieldType.INT -> node.asInt()
             BasicFieldType.LONG -> node.asLong()
             BasicFieldType.FLOAT -> node.asFloat()

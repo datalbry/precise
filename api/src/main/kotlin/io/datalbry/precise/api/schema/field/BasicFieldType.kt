@@ -9,11 +9,6 @@ package io.datalbry.precise.api.schema.field
  */
 enum class BasicFieldType(val id: String) {
     /**
-     * no value
-     */
-    NULL("null"),
-
-    /**
      * 32-bit signed integer
      */
     INT("int"),

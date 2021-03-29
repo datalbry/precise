@@ -4,15 +4,14 @@ import io.datalbry.precise.api.schema.document.Document
 import io.datalbry.precise.api.schema.document.Field
 import io.datalbry.precise.api.schema.document.Record
 
-class GenericDocument(
+data class GenericDocument(
     override val type: String,
-    private val fields: Set<Field<*>>
+    override val id: String,
+    override val fields: Set<Field<*>>
 ) : Document {
 
     override fun get(key: String) = fields.first { it.name == key }
 
     override fun getKeys() = fields.map { it.name }.toSet()
-
-    override fun getFields() = fields
 
 }

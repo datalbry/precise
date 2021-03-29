@@ -1,6 +1,6 @@
 package io.datalbry.precise.validation.extensions
 
-import io.datalbry.precise.api.schema.type.DocumentType
+import io.datalbry.precise.api.schema.type.RecordType
 
 /**
  * Gets the [io.datalbry.precise.api.schema.field.Field] of the corresponding [field]
@@ -9,4 +9,5 @@ import io.datalbry.precise.api.schema.type.DocumentType
  *
  * @return [io.datalbry.precise.api.schema.field.Field] containing the schema definition of the field
  */
-fun DocumentType.getFieldType(field: String) = this.fields.first { it.name == field }
+fun RecordType.getFieldType(field: String) = this.fields.first { it.name == field }
+

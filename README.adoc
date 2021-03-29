@@ -22,10 +22,9 @@ Precise provides tools for Schema generation from e.g. Kotlin Data Classes.
 
 == Types
 
-=== Primitive Types
-Precise supports the following primitive data types
+=== Basic Types
+Precise supports the following basic data types
 
- * `+null:+` No value
  * `+int:+` 32-bit signed integer
  * `+long:+` 64-bit signed integer
  * `+float:+` single-precision (32-bit) IEEE 754 floating-point number
@@ -37,8 +36,8 @@ Precise supports the following primitive data types
 
 Precise supports different kind of complex types.
 
- * `+document+` describes a list of fields and can contain binary data.
- * `+record+` describes a record, or a row in SQL. It primarily differs from `+document+` as it may not contain any binary data.
+ * `+document+` describes a record which can be identified by a globally unique ID.
+ * `+record+` describes a record, or a row in SQL. It primarily differs from `+document+` as it may not be globally unique.
  * `+enum+` contains a list of predefined string values.
 
 Complex types can be described within a `+schema.json+`
@@ -46,20 +45,14 @@ Complex types can be described within a `+schema.json+`
 ==== Definition
 
 The Definition of complex types can be done right in the `+schema.json+`.
-A Document definition may contain a list of fields. All fields
+A Record definition may contain a list of fields. All fields require a type either described by the a <<Basic Types>> or by any definition of <<Complex Types>> in the schema.
+The current only difference between a Record, and a Document is the globally uniqueness of the Document, which can be identified by its ID.
 
 .Example: Document Type Definition
 [source,json]
 ----
 include::docs/schema/complex-type-definition.json[]
 ----
-
-==== Predefined Types
-
-Precise ships with a few predefined types:
-
-* `+Date+` ISO 8601 date string
-* `+DateTime+` ISO 8601 date and time string
 
 == License
 

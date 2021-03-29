@@ -32,7 +32,7 @@ class FindTypeVisitor: KSDefaultVisitor<Unit, Type>() {
 
     private fun getType(classDeclaration: KSClassDeclaration): Types {
         return when (classDeclaration.classKind) {
-            ClassKind.CLASS -> Types.DOCUMENT
+            ClassKind.CLASS -> Types.RECORD
             ClassKind.ENUM_CLASS -> Types.ENUM
             else -> throw IllegalArgumentException("ClassKind[${classDeclaration.classKind}] is not supported")
         }

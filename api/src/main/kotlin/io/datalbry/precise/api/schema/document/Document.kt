@@ -8,9 +8,10 @@ package io.datalbry.precise.api.schema.document
 interface Document: Record {
 
     /**
-     * Type of the document
+     * The id of the document
      *
-     * The type has to be defined in the corresponding schema
+     * IDs have to be globally unique, as they directly identify a specific [Document]
      */
-    val type: String
+    val id: String
+
 }

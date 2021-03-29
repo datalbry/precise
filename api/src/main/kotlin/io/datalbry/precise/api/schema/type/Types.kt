@@ -6,6 +6,6 @@ package io.datalbry.precise.api.schema.type
  * @author timo gruen - 2021-03-11
  */
 enum class Types {
-    DOCUMENT,
+    RECORD,
     ENUM
 }

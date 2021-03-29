@@ -1,4 +1,5 @@
 {
+  "id": "timo.gruen",
   "type": "Employee",
   "fields": {
     "name": "timo",

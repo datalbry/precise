@@ -7,7 +7,7 @@ import com.google.devtools.ksp.symbol.KSPropertyDeclaration
 import com.google.devtools.ksp.visitor.KSEmptyVisitor
 import io.datalbry.precise.api.schema.field.BasicFieldType
 import io.datalbry.precise.api.schema.field.Field
-import io.datalbry.precise.api.schema.type.DocumentType
+import io.datalbry.precise.api.schema.type.RecordType
 import io.datalbry.precise.api.schema.type.EnumType
 import io.datalbry.precise.api.schema.type.Type
 import io.datalbry.precise.api.schema.type.Types
@@ -30,10 +30,10 @@ class FindTypesVisitor(
         logger.info("Start processing", node)
         val typeInformation = node.accept(typeVisitor, Unit)
         return when (typeInformation.type) {
-            Types.DOCUMENT -> {
+            Types.RECORD -> {
                 logger.info("Start searching for fields", node)
                 val fields = node.accept(fieldVisitor, Unit)
-                val type = DocumentType(typeInformation.name, fields.map(this::toField).toSet())
+                val type = RecordType(typeInformation.name, fields.map(this::toField).toSet())
                 setOf(type)
             }
             Types.ENUM -> {

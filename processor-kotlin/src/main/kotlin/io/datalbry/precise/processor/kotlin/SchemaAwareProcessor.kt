@@ -5,7 +5,7 @@ import com.google.devtools.ksp.symbol.KSAnnotated
 import io.datalbry.precise.api.schema.Schema
 import io.datalbry.precise.api.schema.SchemaAware
 import io.datalbry.precise.api.schema.field.BasicFieldType
-import io.datalbry.precise.api.schema.type.DocumentType
+import io.datalbry.precise.api.schema.type.RecordType
 import io.datalbry.precise.api.schema.type.Type
 import io.datalbry.precise.processor.kotlin.deserializer.JacksonSchemaDeserializer
 import io.datalbry.precise.processor.kotlin.visitor.FindTypesVisitor
@@ -16,7 +16,7 @@ import javax.lang.model.SourceVersion
  * [SchemaAwareProcessor] is a [SymbolProcessor] able to generate a [Schema],
  * by scanning for the [SchemaAware] annotation.
  *
- * Currently supporting [DocumentType] and [io.datalbry.precise.api.schema.type.EnumType].
+ * Currently supporting [RecordType] and [io.datalbry.precise.api.schema.type.EnumType].
  * The schema will be persisted in [SCHEMA_DIR]/[SCHEMA_FILE].
  *
  * @author timo gruen - 2021-03-11
@@ -61,7 +61,7 @@ class SchemaAwareProcessor: SymbolProcessor {
         val types = schema.types.map { it.name }
         val valid = schema
             .types
-            .filterIsInstance<DocumentType>()
+            .filterIsInstance<RecordType>()
             .all { containsOnlyValidFields(it, types) }
         if (!valid) {
             val message = "Schema contains types without definition.Please note, that all fields of " +
@@ -72,7 +72,7 @@ class SchemaAwareProcessor: SymbolProcessor {
         }
     }
 
-    private fun containsOnlyValidFields(type: DocumentType, types: List<String>): Boolean {
+    private fun containsOnlyValidFields(type: RecordType, types: List<String>): Boolean {
         return type.fields.all { field ->
             BasicFieldType
                 .values()

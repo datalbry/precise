@@ -10,6 +10,20 @@ package io.datalbry.precise.api.schema.document
 interface Record {
 
     /**
+     * Type of the record
+     *
+     * The type has to be defined in the corresponding schema
+     */
+    val type: String
+
+    /**
+     * Get all present entries of the record
+     *
+     * @return all entries of the record
+     */
+    val fields: Set<Field<*>>
+
+    /**
      * Get a specific field of the record
      *
      * @param key of the field
@@ -26,11 +40,4 @@ interface Record {
      * @return Set of all keys
      */
     fun getKeys(): Set<String>
-
-    /**
-     * Get all present entries of the record
-     *
-     * @return all entries of the record
-     */
-    fun getFields(): Set<Field<*>>
 }

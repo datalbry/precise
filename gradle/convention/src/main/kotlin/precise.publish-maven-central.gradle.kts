@@ -3,10 +3,6 @@ plugins {
     `maven-publish`
 }
 
-configure<SigningExtension> {
-    sign(configurations.archives.get())
-}
-
 configure<PublishingExtension> {
     publications {
         repositories {
@@ -58,4 +54,9 @@ configure<PublishingExtension> {
             }
         }
     }
+}
+
+configure<SigningExtension> {
+    sign(configurations.archives.get())
+    sign(publishing.publications["jar"])
 }
