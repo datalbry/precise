@@ -3,7 +3,7 @@ package io.datalbry.precise.api.schema.document.generic
 import io.datalbry.precise.api.schema.document.Document
 import io.datalbry.precise.api.schema.document.Record
 
-class GenericDocument(
+data class GenericDocument(
     override val id: String,
     private val record: Record
 ) : Document {

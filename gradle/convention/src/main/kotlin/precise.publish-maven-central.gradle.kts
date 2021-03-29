@@ -58,9 +58,5 @@ configure<PublishingExtension> {
 
 configure<SigningExtension> {
     sign(configurations.archives.get())
-}
-
-
-signing {
     sign(publishing.publications["jar"])
 }
