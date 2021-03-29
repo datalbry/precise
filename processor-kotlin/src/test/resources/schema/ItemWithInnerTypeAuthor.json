@@ -12,7 +12,7 @@
       "multiValue" : false,
       "optional" : false
     } ],
-    "type" : "DOCUMENT"
+    "type" : "RECORD"
   }, {
     "name" : "ItemWithCrossLinkToAuthor",
     "fields" : [ {
@@ -26,6 +26,6 @@
       "multiValue" : false,
       "optional" : false
     } ],
-    "type" : "DOCUMENT"
+    "type" : "RECORD"
   } ]
 }

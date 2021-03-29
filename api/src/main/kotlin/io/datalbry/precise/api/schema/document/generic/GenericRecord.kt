@@ -5,13 +5,11 @@ import io.datalbry.precise.api.schema.document.Record
 
 data class GenericRecord(
     override val type: String,
-    private val fields: Set<Field<*>>
+    override val fields: Set<Field<*>>
 ): Record {
 
     override fun get(key: String) = fields.first { it.name == key }
 
     override fun getKeys() = fields.map { it.name }.toSet()
-
-    override fun getFields() = fields
 
 }

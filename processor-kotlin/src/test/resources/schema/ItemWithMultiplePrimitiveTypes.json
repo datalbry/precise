@@ -27,6 +27,6 @@
       "multiValue" : false,
       "optional" : false
     } ],
-    "type" : "DOCUMENT"
+    "type" : "RECORD"
   } ]
 }

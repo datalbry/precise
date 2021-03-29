@@ -20,6 +20,6 @@ class GenericDocumentDeserializer(schema: Schema) : StdNodeBasedDeserializer<Doc
     override fun convert(node: JsonNode, ctxt: DeserializationContext): Document {
         val id = node.get("id").asText()
         val record = recordDeserializer.convert(node, ctxt)
-        return GenericDocument(id, record)
+        return GenericDocument(record.type, id, record.fields)
     }
 }

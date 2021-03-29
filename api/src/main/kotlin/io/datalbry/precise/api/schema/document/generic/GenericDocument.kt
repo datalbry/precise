@@ -1,19 +1,17 @@
 package io.datalbry.precise.api.schema.document.generic
 
 import io.datalbry.precise.api.schema.document.Document
+import io.datalbry.precise.api.schema.document.Field
 import io.datalbry.precise.api.schema.document.Record
 
 data class GenericDocument(
+    override val type: String,
     override val id: String,
-    private val record: Record
+    override val fields: Set<Field<*>>
 ) : Document {
 
-    override val type: String = record.type
+    override fun get(key: String) = fields.first { it.name == key }
 
-    override fun get(key: String) = record[key]
-
-    override fun getKeys() = record.getKeys()
-
-    override fun getFields() = record.getFields()
+    override fun getKeys() = fields.map { it.name }.toSet()
 
 }

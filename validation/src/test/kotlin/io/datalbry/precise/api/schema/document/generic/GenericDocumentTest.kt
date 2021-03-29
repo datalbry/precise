@@ -7,82 +7,64 @@ internal class GenericDocumentTest {
 
     @Test
     fun equals_documentsWithSimpleField_isTrue() {
-        val record1 = GenericRecord("book", setOf(GenericField("name", "test")))
-        val record2 = GenericRecord("book", setOf(GenericField("name", "test")))
-        val doc1 = GenericDocument("test", record1)
-        val doc2 = GenericDocument("test", record2)
+        val doc1 = GenericDocument("test", "12489124", setOf(GenericField("name", "test")))
+        val doc2 = GenericDocument("test", "12489124", setOf(GenericField("name", "test")))
 
         assertEquals(doc1, doc2)
     }
 
     @Test
     fun equals_documentsWithSimpleFields_isTrue() {
-        val record1 = GenericRecord("book",
-            setOf(
+        val doc1 = GenericDocument("book", "test", setOf(
                 GenericField("name", "test"),
                 GenericField("title", "Peter Pan"),
                 GenericField("author", "J. M. Barrie")
-            ))
-        val record2 = GenericRecord("book",
-            setOf(
+        ))
+        val doc2 = GenericDocument("book", "test", setOf(
                 GenericField("name", "test"),
                 GenericField("title", "Peter Pan"),
                 GenericField("author", "J. M. Barrie")
-            ))
-        val doc1 = GenericDocument("test", record1)
-        val doc2 = GenericDocument("test", record2)
+        ))
 
         assertEquals(doc1, doc2)
     }
 
     @Test
     fun equals_documentsWithSimpleArrayFields_isTrue() {
-        val record1 = GenericRecord("book",
-            setOf(
-                GenericField("name", setOf("test", "anotherTest")),
-                GenericField("title", "Peter Pan"),
-                GenericField("author", "J. M. Barrie")
-            ))
-        val record2 = GenericRecord("book",
-            setOf(
-                GenericField("name", setOf("test", "anotherTest")),
-                GenericField("title", "Peter Pan"),
-                GenericField("author", "J. M. Barrie")
-            ))
-        val doc1 = GenericDocument("test", record1)
-        val doc2 = GenericDocument("test", record2)
+        val doc1 = GenericDocument("book","test", setOf(
+            GenericField("name", setOf("test", "anotherTest")),
+            GenericField("title", "Peter Pan"),
+            GenericField("author", "J. M. Barrie")
+        ))
+        val doc2 = GenericDocument("book","test", setOf(
+            GenericField("name", setOf("test", "anotherTest")),
+            GenericField("title", "Peter Pan"),
+            GenericField("author", "J. M. Barrie")
+        ))
 
         assertEquals(doc1, doc2)
     }
 
     @Test
     fun equals_documentsWithRecord_isTrue() {
-        val authorRecord1 = GenericRecord(
-            "author",
-            setOf(
+        val authorRecord1 = GenericRecord("author", setOf(
                 GenericField("name", "J. M. Barrie"),
                 GenericField("date_of_birth", "May 9, 1860")
-            ))
-        val authorRecord2 = GenericRecord(
-            "author",
-            setOf(
-                GenericField("name", "J. M. Barrie"),
-                GenericField("date_of_birth", "May 9, 1860")
-            ))
-        val record1 = GenericRecord("book",
-            setOf(
-                GenericField("name", setOf("test", "anotherTest")),
-                GenericField("title", "Peter Pan"),
-                GenericField("author", authorRecord1)
-            ))
-        val record2 = GenericRecord("book",
-            setOf(
-                GenericField("name", setOf("test", "anotherTest")),
-                GenericField("title", "Peter Pan"),
-                GenericField("author", authorRecord2)
-            ))
-        val doc1 = GenericDocument("test", record1)
-        val doc2 = GenericDocument("test", record2)
+        ))
+        val authorRecord2 = GenericRecord("author", setOf(
+            GenericField("name", "J. M. Barrie"),
+            GenericField("date_of_birth", "May 9, 1860")
+        ))
+        val doc1 = GenericDocument("book","test",setOf(
+            GenericField("name", setOf("test", "anotherTest")),
+            GenericField("title", "Peter Pan"),
+            GenericField("author", authorRecord1)
+        ))
+        val doc2 = GenericDocument("book","test",setOf(
+            GenericField("name", setOf("test", "anotherTest")),
+            GenericField("title", "Peter Pan"),
+            GenericField("author", authorRecord1)
+        ))
 
         assertEquals(doc1, doc2)
     }
@@ -90,41 +72,32 @@ internal class GenericDocumentTest {
     @Test
     fun equals_documentsWithRecordArray_isTrue() {
         val authorRecords1 = setOf(
-            GenericRecord(
-                "author",
-                setOf(
-                    GenericField("name", "J. M. Barrie"),
-                    GenericField("date_of_birth", "May 9, 1860"))),
-            GenericRecord(
-                "author",
-                setOf(
+            GenericRecord("author", setOf(
+                GenericField("name", "J. M. Barrie"),
+                GenericField("date_of_birth", "May 9, 1860"))),
+            GenericRecord("author", setOf(
                     GenericField("name", "Bob"),
-                    GenericField("date_of_birth", "May 9, 2014"))))
+                    GenericField("date_of_birth", "May 9, 2014")))
+        )
         val authorRecords2 = setOf(
-            GenericRecord(
-                "author",
-                setOf(
-                    GenericField("name", "J. M. Barrie"),
-                    GenericField("date_of_birth", "May 9, 1860"))),
-            GenericRecord(
-                "author",
-                setOf(
-                    GenericField("name", "Bob"),
-                    GenericField("date_of_birth", "May 9, 2014"))))
-        val record1 = GenericRecord("book",
-            setOf(
-                GenericField("name", setOf("test", "anotherTest")),
-                GenericField("title", "Peter Pan"),
-                GenericField("author", authorRecords1)
-            ))
-        val record2 = GenericRecord("book",
-            setOf(
-                GenericField("name", setOf("test", "anotherTest")),
-                GenericField("title", "Peter Pan"),
-                GenericField("author", authorRecords2)
-            ))
-        val doc1 = GenericDocument("test", record1)
-        val doc2 = GenericDocument("test", record2)
+            GenericRecord("author", setOf(
+                GenericField("name", "J. M. Barrie"),
+                GenericField("date_of_birth", "May 9, 1860"))),
+            GenericRecord("author", setOf(
+                GenericField("name", "Bob"),
+                GenericField("date_of_birth", "May 9, 2014")))
+        )
+
+        val doc1 = GenericDocument("book","test", setOf(
+            GenericField("name", setOf("test", "anotherTest")),
+            GenericField("title", "Peter Pan"),
+            GenericField("author", authorRecords1)
+        ))
+        val doc2 = GenericDocument("book","test", setOf(
+            GenericField("name", setOf("test", "anotherTest")),
+            GenericField("title", "Peter Pan"),
+            GenericField("author", authorRecords1)
+        ))
 
         assertEquals(doc1, doc2)
     }

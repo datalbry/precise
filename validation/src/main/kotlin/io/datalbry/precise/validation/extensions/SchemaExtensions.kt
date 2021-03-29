@@ -19,7 +19,7 @@ fun Schema.isDefinedEnumType(type: String) = this.types.firstOrNull { it.name ==
  *
  * @return [RecordType] of the [type]
  */
-fun Schema.getDocumentType(type: String) = this.types.first { it.name == type } as RecordType
+fun Schema.getRecordType(type: String) = this.types.first { it.name == type } as RecordType
 
 /**
  * Gets the [EnumType] of the [type]

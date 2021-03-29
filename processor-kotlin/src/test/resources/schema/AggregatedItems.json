@@ -7,7 +7,7 @@
       "multiValue" : false,
       "optional" : true
     } ],
-    "type" : "DOCUMENT"
+    "type" : "RECORD"
   }, {
     "name" : "ItemWithStringArray",
     "fields" : [ {
@@ -16,7 +16,7 @@
       "multiValue" : true,
       "optional" : false
     } ],
-    "type" : "DOCUMENT"
+    "type" : "RECORD"
   }, {
     "name" : "SimpleItem",
     "fields" : [ {
@@ -25,6 +25,6 @@
       "multiValue" : false,
       "optional" : false
     } ],
-    "type" : "DOCUMENT"
+    "type" : "RECORD"
   } ]
 }

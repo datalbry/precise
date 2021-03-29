@@ -10,3 +10,4 @@ import io.datalbry.precise.api.schema.type.RecordType
  * @return [io.datalbry.precise.api.schema.field.Field] containing the schema definition of the field
  */
 fun RecordType.getFieldType(field: String) = this.fields.first { it.name == field }
+
