@@ -40,6 +40,13 @@ internal class SchemaAwareProcessorTest {
     }
 
     @Test
+    fun process_documentWithExcludedField_excludedFieldIsNotPresent() {
+        val compiledSchema = compile(itemWithExcludedField).getSchemaFile()
+        val testSchema = getTestSchema<SchemaAwareProcessor>("ItemWithExcludedField.json")
+        assertSameContent(compiledSchema, testSchema)
+    }
+
+    @Test
     fun process_documentWithStringField_generatedSchemaEquals() {
         val compiledSchema = compile(itemWithOnePrimitiveType).getSchemaFile()
         val testSchema = getTestSchema<SchemaAwareProcessor>("SimpleItem.json")
