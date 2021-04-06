@@ -3,6 +3,8 @@ plugins {
     `maven-publish`
 }
 
+project.tasks.withType(PublishToMavenRepository::class) { dependsOn(project.tasks.clean) }
+
 configure<PublishingExtension> {
     publications {
         repositories {
@@ -57,6 +59,6 @@ configure<PublishingExtension> {
 }
 
 configure<SigningExtension> {
-    sign(configurations.archives.get())
+    useGpgCmd()
     sign(publishing.publications["jar"])
 }

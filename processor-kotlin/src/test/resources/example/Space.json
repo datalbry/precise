@@ -1,0 +1,21 @@
+{
+  "types" : [ {
+    "name" : "Space",
+    "fields" : [
+      {"name" : "id", "type" : "long", "multiValue" : false, "optional" : false},
+      {"name" : "title", "type" : "string", "multiValue" : false, "optional" : false},
+      {"name" : "author", "type" : "Person", "multiValue" : false, "optional" : false},
+      {"name" : "contributors", "type" : "Person", "multiValue" : true, "optional" : false},
+      {"name" : "created", "type" : "string", "multiValue" : false, "optional" : true},
+      {"name" : "last_updated", "type" : "string", "multiValue" : false, "optional" : true}
+    ],
+    "type" : "RECORD"
+  }, {
+    "name" : "Person",
+    "fields" : [
+      {"name" : "name", "type" : "string", "multiValue" : false, "optional" : false},
+      {"name" : "email", "type" : "string", "multiValue" : false, "optional" : false}
+    ],
+    "type" : "RECORD"
+  } ]
+}

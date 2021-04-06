@@ -1,0 +1,12 @@
+{
+  "types" : [ {
+    "name" : "ItemWithExcludedProperty",
+    "fields" : [ {
+      "name" : "name",
+      "type" : "string",
+      "multiValue" : false,
+      "optional" : false
+    } ],
+    "type" : "RECORD"
+  } ]
+}

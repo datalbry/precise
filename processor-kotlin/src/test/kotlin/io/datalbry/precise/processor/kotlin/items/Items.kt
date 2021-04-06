@@ -107,6 +107,23 @@ val itemWithNullableType = SourceFile.kotlin(
     """
 )
 
+val itemWithExcludedField =  SourceFile.kotlin(
+    "ItemWithExcludedField.kt",
+    """
+    package io.datalbry.example
+
+    import io.datalbry.example.Author
+    import io.datalbry.precise.api.schema.Exclude
+    import io.datalbry.precise.api.schema.SchemaAware
+
+    @SchemaAware
+    data class ItemWithExcludedProperty(
+        val name: String,
+        @Exclude val technicalId: String
+    )
+    """
+)
+
 val itemWithCrossLinkToAuthor = SourceFile.kotlin(
     "ItemWithCrossLinkToAuthor.kt",
     """
