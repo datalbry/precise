@@ -1,11 +1,7 @@
 plugins {
+    id("precise.publish-maven-lock")
     idea
 }
 
 version = "0.0.4"
 
-subprojects {
-    repositories {
-        mavenCentral()
-    }
-}

@@ -35,6 +35,8 @@ tasks.getByName("jacocoTestReport") {
     enabled = false
 }
 
+
+
 // Prefix all of our jars with the company name
 tasks.withType<AbstractArchiveTask> {
     archiveBaseName.set("datalbry-${getArchiveName(this.project)}")
