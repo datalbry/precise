@@ -1,0 +1,23 @@
+{
+  "id": "f408850c-47cc-3dce-9ad8-16d79e100906",
+  "type": "Space",
+  "fields": {
+    "createdDate": "2020-06-28T17:03:40.082Z[UTC]",
+    "key": "FIN",
+    "name": "Business",
+    "spaceId": "33139",
+    "createdBy": {
+      "accountId": "5ef73ec487a28e0ab203359b",
+      "accountType": "atlassian",
+      "displayName": "Anonymous (Unlicensed)",
+      "publicName": "Anonymous (Unlicensed)",
+      "type": "known"
+    },
+    "icon": {
+      "height": 48,
+      "isDefault": false,
+      "path": "/images/logo/default-space-logo-256.png",
+      "width": 48
+    }
+  }
+}

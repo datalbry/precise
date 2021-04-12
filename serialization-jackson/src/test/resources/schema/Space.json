@@ -1,0 +1,124 @@
+{
+  "types": [
+    {
+      "name": "Space",
+      "fields": [
+        {
+          "name": "key",
+          "type": "string",
+          "multiValue": false,
+          "optional": false
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "multiValue": false,
+          "optional": false
+        },
+        {
+          "name": "spaceId",
+          "type": "string",
+          "multiValue": false,
+          "optional": false
+        },
+        {
+          "name": "createdBy",
+          "type": "User",
+          "multiValue": false,
+          "optional": false
+        },
+        {
+          "name": "createdDate",
+          "type": "string",
+          "multiValue": false,
+          "optional": false
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "multiValue": false,
+          "optional": true
+        },
+        {
+          "name": "icon",
+          "type": "Icon",
+          "multiValue": false,
+          "optional": true
+        }
+      ],
+      "type": "RECORD"
+    },
+    {
+      "name": "User",
+      "fields": [
+        {
+          "name": "mail",
+          "type": "string",
+          "multiValue": false,
+          "optional": true
+        },
+        {
+          "name": "accountId",
+          "type": "string",
+          "multiValue": false,
+          "optional": false
+        },
+        {
+          "name": "accountType",
+          "type": "string",
+          "multiValue": false,
+          "optional": false
+        },
+        {
+          "name": "displayName",
+          "type": "string",
+          "multiValue": false,
+          "optional": false
+        },
+        {
+          "name": "publicName",
+          "type": "string",
+          "multiValue": false,
+          "optional": false
+        },
+        {
+          "name": "type",
+          "type": "string",
+          "multiValue": false,
+          "optional": false
+        }
+      ],
+      "type": "RECORD"
+    },
+    {
+      "name": "Icon",
+      "fields": [
+        {
+          "name": "height",
+          "type": "int",
+          "multiValue": false,
+          "optional": false
+        },
+        {
+          "name": "width",
+          "type": "int",
+          "multiValue": false,
+          "optional": false
+        },
+        {
+          "name": "path",
+          "type": "string",
+          "multiValue": false,
+          "optional": false
+        },
+        {
+          "name": "isDefault",
+          "type": "boolean",
+          "multiValue": false,
+          "optional": false
+        }
+      ],
+      "type": "RECORD"
+    }
+  ]
+}
