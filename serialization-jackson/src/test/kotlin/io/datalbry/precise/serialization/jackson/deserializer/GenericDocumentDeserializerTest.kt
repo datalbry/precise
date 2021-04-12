@@ -91,7 +91,7 @@ internal class GenericDocumentDeserializerTest {
     }
 
     @Test
-    fun deserialize_documentWithMultileRecords_worksJustFine() {
+    fun deserialize_documentWithMultipleRecords_worksJustFine() {
         val schema = getTestSchema("Space.json")
         val json = getTestDocument("Space.json")
         val jackson = getJacksonMapper(schema)
