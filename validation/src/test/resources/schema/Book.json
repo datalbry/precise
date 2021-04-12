@@ -27,7 +27,7 @@
       "multiValue" : true,
       "optional" : false
     } ],
-    "type" : "DOCUMENT"
+    "type" : "RECORD"
   }, {
     "name" : "Person",
     "fields" : [ {
@@ -41,6 +41,6 @@
       "multiValue" : false,
       "optional" : false
     } ],
-    "type" : "DOCUMENT"
+    "type" : "RECORD"
   } ]
 }

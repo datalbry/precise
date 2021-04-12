@@ -1,5 +1,6 @@
 {
   "type": "Document",
+  "id": "TestDoc",
   "fields": {
     "name": "DataLbry"
   }
