@@ -8,6 +8,7 @@ import io.datalbry.precise.api.schema.document.Record
 import io.datalbry.precise.serialization.jackson.deserializer.GenericDocumentDeserializer
 import io.datalbry.precise.serialization.jackson.deserializer.GenericRecordDeserializer
 import io.datalbry.precise.serialization.jackson.deserializer.SchemaDeserializer
+import io.datalbry.precise.serialization.jackson.serialization.GenericDocumentSerializer
 
 private fun version() = Version(1, 0, 0, null, "io.datalbry.precise", "serialization-jackson")
 
@@ -28,9 +29,11 @@ class PreciseModule(schema: Schema): SimpleModule("Precise", version()) {
         val documentDeserializer = GenericDocumentDeserializer(schema)
         val recordDeserializer = GenericRecordDeserializer(schema)
         val schemaDeserializer = SchemaDeserializer()
+        val documentSerializer = GenericDocumentSerializer()
         this.addDeserializer(Document::class.java, documentDeserializer)
         this.addDeserializer(Record::class.java, recordDeserializer)
         this.addDeserializer(Schema::class.java, schemaDeserializer)
+        this.addSerializer(Document::class.java, documentSerializer)
     }
 
 }

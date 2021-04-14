@@ -77,7 +77,7 @@ class GenericRecordDeserializer(
         val type = basicFieldTypeById(fieldSchema.type)
         val node = entry.value
         val value = when {
-            fieldSchema.multiValue -> node.mapValues { readValue(type, node) }
+            fieldSchema.multiValue -> node.mapValues { readValue(type, it) }
             else -> readValue(type, node)
         }
         return GenericField(entry.key, value!!)

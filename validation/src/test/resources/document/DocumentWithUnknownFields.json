@@ -1,5 +1,6 @@
 {
   "type": "Document",
+  "id": "UnknownFieldTestDoc",
   "fields": {
     "name": "DataLbry",
     "unknown": "Something",

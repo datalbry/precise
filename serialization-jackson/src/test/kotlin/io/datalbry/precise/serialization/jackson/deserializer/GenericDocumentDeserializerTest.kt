@@ -7,9 +7,14 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import io.datalbry.precise.api.schema.Schema
 import io.datalbry.precise.api.schema.document.Document
 import io.datalbry.precise.api.schema.document.Record
+import io.datalbry.precise.api.schema.document.generic.GenericField
+import io.datalbry.precise.api.schema.document.generic.GenericRecord
+import io.datalbry.precise.serialization.jackson.deserializer.assertion.assertContainsValues
+import io.datalbry.precise.serialization.jackson.deserializer.assertion.assertFieldPresent
 import io.datalbry.precise.serialization.jackson.deserializer.assertion.assertValueType
 import io.datalbry.precise.serialization.jackson.deserializer.util.getTestDocument
 import io.datalbry.precise.serialization.jackson.deserializer.util.getTestSchema
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 internal class GenericDocumentDeserializerTest {
@@ -71,6 +76,39 @@ internal class GenericDocumentDeserializerTest {
         assertValueType<Collection<String>>(document["label"])
         assertValueType<Record>(document["author"])
         assertValueType<Collection<Record>>(document["co-authors"])
+
+        val bob = GenericRecord("Person", setOf(
+            GenericField("name", "bob"),
+            GenericField("email", "bob@datalbry.io")
+        ))
+
+        val alice = GenericRecord("Person", setOf(
+            GenericField("name", "alice"),
+            GenericField("email", "alice@datalbry.io")
+        ))
+        assertContainsValues(document["co-authors"], alice, bob)
+        assertContainsValues(document["label"], "Fantasy", "Romance", "Anakin")
+    }
+
+    @Test
+    fun deserialize_documentWithMultipleRecords_worksJustFine() {
+        val schema = getTestSchema("Space.json")
+        val json = getTestDocument("Space.json")
+        val jackson = getJacksonMapper(schema)
+
+        val document: Document = jackson.readValue(json)
+        assertFieldPresent("key", document)
+        assertFieldPresent("createdDate", document)
+        assertFieldPresent("name", document)
+        assertFieldPresent("spaceId", document)
+        assertFieldPresent("createdBy", document)
+        assertFieldPresent("icon", document)
+
+        assertValueType<String>(document["key"])
+        assertValueType<String>(document["createdDate"])
+        assertValueType<String>(document["name"])
+        assertValueType<String>(document["spaceId"])
+        assertValueType<Record>(document["createdBy"])
     }
 
     private fun getJacksonMapper(schema: Schema): ObjectMapper {
