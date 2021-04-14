@@ -14,6 +14,7 @@ includeBuild(
 
 include(
     "api",
+    "core",
     "processor-kotlin",
     "validation",
     "serialization-jackson"
