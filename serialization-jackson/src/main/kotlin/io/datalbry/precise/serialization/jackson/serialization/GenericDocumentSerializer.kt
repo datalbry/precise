@@ -9,9 +9,8 @@ import io.datalbry.precise.api.schema.document.Field
 import io.datalbry.precise.api.schema.document.Record
 import io.datalbry.precise.api.schema.document.generic.GenericField
 import io.datalbry.precise.api.schema.field.BasicFieldType
-import io.datalbry.precise.serialization.jackson.util.getBasicFieldType
-import io.datalbry.precise.serialization.jackson.util.isBasicFieldType
-import java.lang.IllegalArgumentException
+import io.datalbry.precise.core.util.getBasicFieldType
+import io.datalbry.precise.core.util.isBasicFieldType
 import java.util.*
 
 class GenericDocumentSerializer: StdSerializer<Document>(Document::class.java) {

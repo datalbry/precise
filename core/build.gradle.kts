@@ -5,9 +5,8 @@ plugins {
 
 dependencies {
     api(project(":api"))
-    api(project(":core"))
 
-    implementation(libs.bundles.jackson)
-
+    implementation(libs.kotlin.reflect)
+    implementation(libs.kotlin.stdlib)
     testImplementation(libs.bundles.junit)
 }
