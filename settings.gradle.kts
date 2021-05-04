@@ -8,9 +8,7 @@ pluginManagement {
     }
 }
 
-includeBuild(
-    "gradle/convention"
-)
+includeBuild("gradle/convention")
 
 include(
     "api",

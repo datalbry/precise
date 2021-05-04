@@ -93,7 +93,7 @@ class ReflectionSchemaFactory: SchemaFactory<Class<*>> {
 
     private fun isBasicTypeId(typeString: String) = BasicFieldType.values().map {
         it.id.toLowerCase()
-    }.contains(typeString)
+    }.contains(typeString.toLowerCase())
 
     private fun Field.isOptional() = isOptional(this.type) || annotatedWithNullable()
 

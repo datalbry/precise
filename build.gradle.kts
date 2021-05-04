@@ -1,8 +1,7 @@
 plugins {
-    id("precise.publish-maven-lock")
+    id("precise.publish-maven-central")
     idea
 }
 
-version = "0.0.6"
-
-
+group = "io.datalbry.precise"
+version = "0.0.7"

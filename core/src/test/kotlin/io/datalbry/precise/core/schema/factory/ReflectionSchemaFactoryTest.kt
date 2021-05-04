@@ -1,6 +1,7 @@
 package io.datalbry.precise.core.schema.factory
 
 import io.datalbry.precise.api.schema.field.BasicFieldType
+import io.datalbry.precise.api.schema.field.Field
 import io.datalbry.precise.api.schema.type.EnumType
 import io.datalbry.precise.api.schema.type.RecordType
 import io.datalbry.precise.core.items.*
@@ -114,6 +115,22 @@ internal class ReflectionSchemaFactoryTest {
 
         val enumValues = SimpleEnum.values().map { it.name }
         assertTrue(typeSchema.values.containsAll(enumValues))
+    }
+
+    @Test
+    fun deriveSchema_fromItemWithOptionalStandardFields_innerTypeIsStandardField() {
+        val schemaFactory = ReflectionSchemaFactory()
+        val schema = schemaFactory.deriveSchema(ItemWithOptionalField::class.java)
+
+        val typeSchema = schema.types.firstOrNull { it.name == ItemWithOptionalField::class.simpleName }
+        assertTrue(typeSchema != null)
+        assertTrue(typeSchema is RecordType)
+        typeSchema as RecordType
+
+        val basicFieldTypeIds = BasicFieldType.values().map { it.id }
+        typeSchema.fields.filter(Field::optional).forEach {
+            assertTrue(basicFieldTypeIds.contains(it.type))
+        }
     }
 
     @Test
