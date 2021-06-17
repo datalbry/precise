@@ -1,6 +1,7 @@
 package io.datalbry.precise.api.validation
 
 import io.datalbry.precise.api.schema.Schema
+import io.datalbry.precise.api.schema.document.Document
 import java.io.File
 
 /**
@@ -19,6 +20,16 @@ interface Validator<Type> {
      * @return true if the document is valid, otherwise false
      */
     fun isValid(schema: Schema, type: Type): Boolean
+
+    /**
+     * Checks if the [Type] is valid according to the [schema]
+     *
+     * @param schema containing the document definition
+     * @param type to validate
+     *
+     * @return validation result
+     */
+    fun validate(schema: Schema, type: Type): ValidationResult
 
     /**
      * Checks if the [file] contains a valid [Type], which is valid according to the [schema]
