@@ -3,14 +3,17 @@
 The Precise framework is built with having a tree of relationships in mind.
 
 == Getting Started
+
 Precise provides some convenience annotations, helping developer to benefit from Precise.
 
 
 === Annotations
+
 Precise is heavily using annotations and type information to derive the schema from the source code.
 This is primarily focused on helping developers to minimize the boilerplate code necessary to start using Precise.
 
 ==== SchemaAware
+
 `SchemaAware` is a class-level annotation telling Precise to take the class into account for generating the Schema.
 
 As an example the following class...
@@ -52,6 +55,7 @@ data class Superhero(
 
 
 ==== Exclude
+
 `Exclude` is a field-level annotation, telling Precise to *not* include the field in the Schema generation.
 Respectively it will exclude the field for the document and considers the field non-existent when serializing / deserializing.
 
@@ -91,6 +95,7 @@ Exclude should be used with caution,
 especially for deserializing, fields with the `@Exclude` will not be deserialized by Precise.
 
 === Nullable
+
 `Nullable` is a field-level annotation, telling Precise to consider the corresponding field as Optional.
 The `Nullable` annotation can be substituted with making the field of type (e.g. `Optional<String>`),
 or to explicitly set the type nullable (e.g. `String?`).
