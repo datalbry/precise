@@ -20,6 +20,11 @@ The Schema holds the information of how the data looks like, which fields it con
 To avoid the complexity to always write the Schema manually,
 Precise provides tools for Schema generation from e.g. Kotlin Data Classes.
 
+== Usage
+If you are new to Precise, checkout our usage guides for different languages:
+
+* link:docs/USAGE_KOTLIN.adoc[Kotlin (JVM)]
+
 == Types
 
 === Basic Types

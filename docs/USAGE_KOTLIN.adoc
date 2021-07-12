@@ -1,0 +1,137 @@
+= Usage
+
+The Precise framework is built with having a tree of relationships in mind.
+
+== Getting Started
+Precise provides some convenience annotations, helping developer to benefit from Precise.
+
+
+=== Annotations
+Precise is heavily using annotations and type information to derive the schema from the source code.
+This is primarily focused on helping developers to minimize the boilerplate code necessary to start using Precise.
+
+==== SchemaAware
+`SchemaAware` is a class-level annotation telling Precise to take the class into account for generating the Schema.
+
+As an example the following class...
+
+.Superhero.kt
+....
+@SchemaAware
+data class Superhero(
+   val name: String,
+   val ability: String
+)
+....
+
+...will result into the corresponding schema:
+
+.Schema.json
+....
+{
+  "types" : [ {
+    "name" : "Superhero",
+    "fields" : [
+      {
+        "name" : "name",
+        "type" : "string",
+        "multiValue" : false,
+        "optional" : false
+      },
+      {
+        "name" : "ability",
+        "type" : "string",
+        "multiValue" : false,
+        "optional" : false
+      }
+    }],
+    "type" : "RECORD"
+  ]
+}
+....
+
+
+==== Exclude
+`Exclude` is a field-level annotation, telling Precise to *not* include the field in the Schema generation.
+Respectively it will exclude the field for the document and considers the field non-existent when serializing / deserializing.
+
+.Superhero.kt
+....
+@SchemaAware
+data class Superhero(
+   val name: String,
+   @Exclude val ability: String
+)
+....
+
+...will result into the corresponding schema:
+
+.Schema.json
+....
+{
+  "types" : [ {
+    "name" : "Superhero",
+    "fields" : [
+      {
+        "name" : "name",
+        "type" : "string",
+        "multiValue" : false,
+        "optional" : false
+      }
+    }],
+    "type" : "RECORD"
+  ]
+}
+....
+
+The `ability` field is now being excluded by Precise,
+so the corresponding `Schema.json` does not contain any information of the field `ability`.
+
+Exclude should be used with caution,
+especially for deserializing, fields with the `@Exclude` will not be deserialized by Precise.
+
+=== Nullable
+`Nullable` is a field-level annotation, telling Precise to consider the corresponding field as Optional.
+The `Nullable` annotation can be substituted with making the field of type (e.g. `Optional<String>`),
+or to explicitly set the type nullable (e.g. `String?`).
+
+.Superhero.kt
+....
+@SchemaAware
+data class Superhero(
+   val name: String,
+   @Nullable val ability: String?
+)
+....
+
+...will result into the corresponding schema:
+
+.Schema.json
+....
+{
+  "types" : [ {
+    "name" : "Superhero",
+    "fields" : [
+      {
+        "name" : "name",
+        "type" : "string",
+        "multiValue" : false,
+        "optional" : false
+      },
+      {
+        "name" : "name",
+        "type" : "string",
+        "multiValue" : false,
+        "optional" : true
+      }
+    }],
+    "type" : "RECORD"
+  ]
+}
+....
+
+If a field is annotated with `Nullable`, Precise does not enforce the existence when serializing / deserializing.
+
+NOTE: Kotlin - in contrast to Java - is null safe by design.
+So the actual annotation does not provide any benefits over using the nullable symbol of Kotlin. (e.g. `String?`).
+
