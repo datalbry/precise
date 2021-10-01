@@ -17,8 +17,8 @@ version = getVersion(project)
 group = "io.datalbry.precise"
 
 dependencies {
-    runtimeOnly("org.jetbrains.kotlin:kotlin-reflect:1.4.21")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.4.21")
+    runtimeOnly("org.jetbrains.kotlin:kotlin-reflect:1.5.30")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.5.30")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 }

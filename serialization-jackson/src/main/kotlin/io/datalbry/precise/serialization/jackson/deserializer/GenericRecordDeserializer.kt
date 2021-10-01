@@ -22,6 +22,7 @@ import io.datalbry.precise.api.schema.field.Field as FieldSchema
  *
  * @author timo gruen - 2021-03-25
  */
+@ExperimentalUnsignedTypes
 class GenericRecordDeserializer(
     private val schema: Schema
 )
@@ -82,7 +83,7 @@ class GenericRecordDeserializer(
         }
         return GenericField(entry.key, value!!)
     }
-
+    
     private fun readValue(type: BasicFieldType, node: JsonNode): Any? {
         return when (type) {
             BasicFieldType.INT -> node.asInt()
