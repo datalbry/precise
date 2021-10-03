@@ -22,28 +22,19 @@ import javax.lang.model.SourceVersion
  * @author timo gruen - 2021-03-11
  */
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
-class SchemaAwareProcessor: SymbolProcessor {
+class SchemaAwareProcessor(
+    private val codeGenerator: CodeGenerator,
+    private val logger: KSPLogger
+): SymbolProcessor {
 
     private val schemaDeserializer = JacksonSchemaDeserializer()
-    lateinit var codeGenerator: CodeGenerator
-    lateinit var logger: KSPLogger
-
-    override fun init(
-        options: Map<String, String>,
-        kotlinVersion: KotlinVersion,
-        codeGenerator: CodeGenerator,
-        logger: KSPLogger
-    ) {
-        this.logger = logger
-        this.codeGenerator = codeGenerator
-    }
 
     override fun process(resolver: Resolver): List<KSAnnotated> {
         val typeVisitor = FindTypesVisitor(logger, resolver)
 
         val annotationModels = resolver.getSymbolsWithAnnotation(SchemaAware::class.java.canonicalName)
 
-        val types = getTypes(annotationModels, typeVisitor)
+        val types = getTypes(annotationModels.toList(), typeVisitor)
         val schema = Schema(types)
 
         validateSchema(schema)
