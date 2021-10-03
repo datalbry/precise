@@ -3,10 +3,10 @@ package io.datalbry.precise.processor.kotlin.util
 import com.tschuchort.compiletesting.KotlinCompilation
 import com.tschuchort.compiletesting.SourceFile
 import com.tschuchort.compiletesting.kspSourcesDir
-import com.tschuchort.compiletesting.symbolProcessors
-import io.datalbry.precise.processor.kotlin.SchemaAwareProcessor
+import com.tschuchort.compiletesting.symbolProcessorProviders
 import io.datalbry.precise.processor.kotlin.SchemaAwareProcessor.Companion.SCHEMA_DIR
 import io.datalbry.precise.processor.kotlin.SchemaAwareProcessor.Companion.SCHEMA_FILE
+import io.datalbry.precise.processor.kotlin.SchemaAwareProcessorProvider
 import java.io.File
 import java.nio.file.Paths
 
@@ -14,7 +14,7 @@ import java.nio.file.Paths
 fun compile(vararg sourceFiles: SourceFile): Pair<File, KotlinCompilation.Result> {
     val compilation = KotlinCompilation().apply {
         sources = sourceFiles.asList()
-        symbolProcessors = listOf(SchemaAwareProcessor())
+        symbolProcessorProviders = listOf(SchemaAwareProcessorProvider())
         inheritClassPath = true
         messageOutputStream = System.out
     }

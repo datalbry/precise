@@ -14,7 +14,7 @@ import io.datalbry.precise.api.schema.Exclude
 class FindFieldVisitor: KSDefaultVisitor<Unit, List<KSPropertyDeclaration>>() {
 
     override fun visitClassDeclaration(classDeclaration: KSClassDeclaration, data: Unit) =
-        classDeclaration.getAllProperties().filter { it.getter != null }.filterNot { isExcluded(it) }
+        classDeclaration.getAllProperties().filter { it.getter != null }.filterNot { isExcluded(it) }.toList()
 
     override fun defaultHandler(node: KSNode, data: Unit) = emptyList<KSPropertyDeclaration>()
 
