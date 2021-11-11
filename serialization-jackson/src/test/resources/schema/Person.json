@@ -1,0 +1,31 @@
+{
+  "types" : [ {
+    "name" : "Person",
+    "fields" : [ {
+      "name" : "name",
+      "type" : "string",
+      "multiValue" : false,
+      "optional" : false
+    }, {
+      "name" : "lastName",
+      "type" : "string",
+      "multiValue" : false,
+      "optional" : false
+    }, {
+      "name" : "company",
+      "type" : "string",
+      "multiValue" : false,
+      "optional" : false
+    }, {
+      "name" : "position",
+      "type": "PositionEnum",
+      "multiValue" : false,
+      "optional" : false
+    } ],
+    "type" : "RECORD"
+  }, {
+    "name": "PositionEnum",
+    "values": ["CEO", "Dev", "Sales", "Other"],
+    "type" : "ENUM"
+  } ]
+}

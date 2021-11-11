@@ -111,6 +111,26 @@ internal class GenericDocumentDeserializerTest {
         assertValueType<Record>(document["createdBy"])
     }
 
+    @Test
+    fun deserialize_documentWithEnum_worksJustFine() {
+        val schema = getTestSchema("Person.json")
+        val json = getTestDocument("Person.json")
+        val jackson = getJacksonMapper(schema)
+
+        val document: Document = jackson.readValue(json)
+
+        val presentKeys = document.getKeys()
+        presentKeys.contains("name")
+        presentKeys.contains("lastName")
+        presentKeys.contains("company")
+        presentKeys.contains("position")
+
+        assertValueType<String>(document["name"])
+        assertValueType<String>(document["lastName"])
+        assertValueType<String>(document["company"])
+        assertValueType<String>(document["position"])
+    }
+
     private fun getJacksonMapper(schema: Schema): ObjectMapper {
         val jackson = jacksonObjectMapper()
         val module = SimpleModule().addDeserializer(Document::class.java, GenericDocumentDeserializer(schema))

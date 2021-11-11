@@ -50,7 +50,7 @@ class SchemaDeserializer: StdDeserializer<Schema>(Schema::class.java) {
 
     private fun toEnumType(node: JsonNode): Type {
         val name = node.get("name").asText()
-        val values = node.findValuesAsText("values").toSet()
+        val values = node.get("values").mapValues { it.asText() }
         return EnumType(name, values)
     }
 }
