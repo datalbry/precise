@@ -1,0 +1,10 @@
+{
+  "id": "timo.gruen",
+  "type": "Person",
+  "fields": {
+    "name": "timo",
+    "lastName": "gruen",
+    "company":  "DataLbry",
+    "position": "cEo"
+  }
+}

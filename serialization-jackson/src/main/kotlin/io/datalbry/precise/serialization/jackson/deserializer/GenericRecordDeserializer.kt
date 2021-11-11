@@ -70,9 +70,10 @@ class GenericRecordDeserializer(
         val enumType = schema.getEnumType(type.type)
         val value = entry.value.asText()
 
-        if (enumType.values.contains(value).not()) {
+        if (enumType.values.none { it.equals(value, ignoreCase = true) }) {
             throw InvalidEnumValueException(enumType, value)
         }
+
         return GenericField(entry.key, value)
     }
 
