@@ -14,8 +14,10 @@ import io.datalbry.precise.serialization.jackson.deserializer.assertion.assertFi
 import io.datalbry.precise.serialization.jackson.deserializer.assertion.assertValueType
 import io.datalbry.precise.serialization.jackson.deserializer.util.getTestDocument
 import io.datalbry.precise.serialization.jackson.deserializer.util.getTestSchema
+import io.datalbry.precise.serialization.jackson.exception.InvalidEnumValueException
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 internal class GenericDocumentDeserializerTest {
 
@@ -129,6 +131,18 @@ internal class GenericDocumentDeserializerTest {
         assertValueType<String>(document["lastName"])
         assertValueType<String>(document["company"])
         assertValueType<String>(document["position"])
+    }
+
+
+    @Test
+    fun deserialize_documentWithInvalidEnum_throwsException() {
+        val schema = getTestSchema("Person.json")
+        val json = getTestDocument("PersonInvalid.json")
+        val jackson = getJacksonMapper(schema)
+
+        assertThrows<InvalidEnumValueException> {
+            jackson.readValue<Document>(json)
+        }
     }
 
     private fun getJacksonMapper(schema: Schema): ObjectMapper {

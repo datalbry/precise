@@ -1,0 +1,10 @@
+{
+  "id": "max.mustermann",
+  "type": "Person",
+  "fields": {
+    "name": "max",
+    "lastName": "mustermann",
+    "company":  "DataLbry",
+    "position": "InvalidPosition"
+  }
+}
