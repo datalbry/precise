@@ -1,6 +1,5 @@
 package io.datalbry.precise.serialization.jackson.deserializer
 
-import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer
@@ -12,6 +11,7 @@ import io.datalbry.precise.api.schema.document.generic.GenericField
 import io.datalbry.precise.api.schema.document.generic.GenericRecord
 import io.datalbry.precise.api.schema.field.BasicFieldType
 import io.datalbry.precise.api.schema.type.RecordType
+import io.datalbry.precise.serialization.jackson.exception.InvalidEnumValueException
 import io.datalbry.precise.serialization.jackson.exception.InvalidTypeException
 import io.datalbry.precise.serialization.jackson.exception.NoSuchTypeException
 import io.datalbry.precise.serialization.jackson.extension.*
@@ -24,9 +24,7 @@ import io.datalbry.precise.api.schema.field.Field as FieldSchema
  */
 class GenericRecordDeserializer(
     private val schema: Schema
-)
-    : StdNodeBasedDeserializer<Record>(Record::class.java)
-{
+) : StdNodeBasedDeserializer<Record>(Record::class.java) {
 
     override fun convert(node: JsonNode, ctxt: DeserializationContext): Record {
         val type = node.get("type").asText()
@@ -46,9 +44,9 @@ class GenericRecordDeserializer(
                 val type = fieldSchema.type
                 when {
                     isBasicFieldType(type) -> getBasicField(fieldSchema, it)
-                    schema.isEnumType(type) -> getEnumField(it)
+                    schema.isEnumType(type) -> getEnumField(schema, fieldSchema, it)
                     schema.isRecordType(type) -> getRecordField(schema, fieldSchema, it)
-                else -> throw NoSuchTypeException(schema, type)
+                    else -> throw NoSuchTypeException(schema, type)
                 }
             }
             .toSet()
@@ -68,8 +66,15 @@ class GenericRecordDeserializer(
         return GenericField(entry.key, records)
     }
 
-    private fun getEnumField(entry: Map.Entry<String, JsonNode>): GenericField<*> {
-        return GenericField(entry.key, entry.value.asText())
+    private fun getEnumField(schema: Schema, type: FieldSchema, entry: Map.Entry<String, JsonNode>): GenericField<*> {
+        val enumType = schema.getEnumType(type.type)
+        val value = entry.value.asText()
+
+        if (enumType.values.none { it.equals(value, ignoreCase = true) }) {
+            throw InvalidEnumValueException(enumType, value)
+        }
+
+        return GenericField(entry.key, value)
     }
 
     @Suppress("IMPLICIT_CAST_TO_ANY")

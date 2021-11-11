@@ -11,6 +11,7 @@ import io.datalbry.precise.api.schema.document.generic.GenericRecord
 import io.datalbry.precise.serialization.jackson.deserializer.assertion.assertContainsValues
 import io.datalbry.precise.serialization.jackson.deserializer.util.getTestDocument
 import io.datalbry.precise.serialization.jackson.deserializer.util.getTestSchema
+import io.datalbry.precise.serialization.jackson.extension.getEnumType
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -58,6 +59,13 @@ internal class PreciseModuleTest {
 
         assertContainsValues(doc2["label"], doc1["label"].value as Collection<*>)
         assertContainsValues(doc2["co-authors"], doc1["co-authors"].value as Collection<*>)
+    }
+
+    @Test
+    fun deserialize_schemaWithEnum_worksJustFine() {
+        val schema = getTestSchema("Person.json")
+        val enumSchema = schema.getEnumType("PositionEnum")
+        assertEquals(enumSchema.values.toSet(), setOf("CEO", "Dev", "Sales", "Other"))
     }
 
     private fun preconfiguredJackson(schema: Schema): ObjectMapper {

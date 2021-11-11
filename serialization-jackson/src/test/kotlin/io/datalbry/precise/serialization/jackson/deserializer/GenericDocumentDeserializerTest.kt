@@ -14,8 +14,10 @@ import io.datalbry.precise.serialization.jackson.deserializer.assertion.assertFi
 import io.datalbry.precise.serialization.jackson.deserializer.assertion.assertValueType
 import io.datalbry.precise.serialization.jackson.deserializer.util.getTestDocument
 import io.datalbry.precise.serialization.jackson.deserializer.util.getTestSchema
+import io.datalbry.precise.serialization.jackson.exception.InvalidEnumValueException
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 internal class GenericDocumentDeserializerTest {
 
@@ -109,6 +111,59 @@ internal class GenericDocumentDeserializerTest {
         assertValueType<String>(document["name"])
         assertValueType<String>(document["spaceId"])
         assertValueType<Record>(document["createdBy"])
+    }
+
+    @Test
+    fun deserialize_documentWithEnum_worksJustFine() {
+        val schema = getTestSchema("Person.json")
+        val json = getTestDocument("Person.json")
+        val jackson = getJacksonMapper(schema)
+
+        val document: Document = jackson.readValue(json)
+
+        val presentKeys = document.getKeys()
+        presentKeys.contains("name")
+        presentKeys.contains("lastName")
+        presentKeys.contains("company")
+        presentKeys.contains("position")
+
+        assertValueType<String>(document["name"])
+        assertValueType<String>(document["lastName"])
+        assertValueType<String>(document["company"])
+        assertValueType<String>(document["position"])
+    }
+
+
+    @Test
+    fun deserialize_documentWithInvalidEnum_throwsException() {
+        val schema = getTestSchema("Person.json")
+        val json = getTestDocument("PersonInvalid.json")
+        val jackson = getJacksonMapper(schema)
+
+        assertThrows<InvalidEnumValueException> {
+            jackson.readValue<Document>(json)
+        }
+    }
+
+
+    @Test
+    fun deserialize_documentWithEnumRelaxedBinding_worksJustFine() {
+        val schema = getTestSchema("Person.json")
+        val json = getTestDocument("PersonRelaxedBinding.json")
+        val jackson = getJacksonMapper(schema)
+
+        val document: Document = jackson.readValue(json)
+
+        val presentKeys = document.getKeys()
+        presentKeys.contains("name")
+        presentKeys.contains("lastName")
+        presentKeys.contains("company")
+        presentKeys.contains("position")
+
+        assertValueType<String>(document["name"])
+        assertValueType<String>(document["lastName"])
+        assertValueType<String>(document["company"])
+        assertValueType<String>(document["position"])
     }
 
     private fun getJacksonMapper(schema: Schema): ObjectMapper {
