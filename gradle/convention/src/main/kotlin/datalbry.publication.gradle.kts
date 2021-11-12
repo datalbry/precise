@@ -19,9 +19,11 @@ configure<SigningExtension> {
 
 fun MavenPublication.pom() {
     pom {
-        name.set("GitHub ${project.name}")
-        description.set("Client implementation for GitHub")
-        url.set("https://github.com/datalbry/github-client")
+        name.set("Precise")
+        description.set(
+            "Precise is just another data serialization framework"
+        )
+        url.set("https://github.com/datalbry/precise")
         licenses {
             license {
                 name.set("The Apache License, Version 2.0")
@@ -36,9 +38,9 @@ fun MavenPublication.pom() {
             }
         }
         scm {
-            connection.set("https://github.com/datalbry/github-client.git")
-            developerConnection.set("scm:git:ssh:git@github.com:datalbry/github-client.git")
-            url.set("https://github.com/datalbry/github-client")
+            connection.set("https://github.com/datalbry/precise.git")
+            developerConnection.set("scm:git:ssh:git@github.com:datalbry/precise.git")
+            url.set("https://github.com/datalbry/precise")
         }
     }
 }
