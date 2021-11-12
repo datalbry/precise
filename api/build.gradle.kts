@@ -1,4 +1,4 @@
 plugins {
-    id("precise.kotlin")
-    id("precise.publication")
+    id("datalbry.kotlin")
+    id("datalbry.publication")
 }

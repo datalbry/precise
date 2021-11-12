@@ -1,6 +1,6 @@
 plugins {
-    id("maven-publish")
-    id("signing")
+    signing
+    `maven-publish`
 }
 
 publishing {
@@ -19,11 +19,9 @@ configure<SigningExtension> {
 
 fun MavenPublication.pom() {
     pom {
-        name.set("Precise")
-        description.set(
-            "Precise is just another data serialization framework"
-        )
-        url.set("https://github.com/datalbry/precise")
+        name.set("GitHub ${project.name}")
+        description.set("Client implementation for GitHub")
+        url.set("https://github.com/datalbry/github-client")
         licenses {
             license {
                 name.set("The Apache License, Version 2.0")
@@ -38,9 +36,9 @@ fun MavenPublication.pom() {
             }
         }
         scm {
-            connection.set("https://github.com/datalbry/precise.git")
-            developerConnection.set("scm:git:ssh:git@github.com:datalbry/precise.git")
-            url.set("https://github.com/datalbry/precise")
+            connection.set("https://github.com/datalbry/github-client.git")
+            developerConnection.set("scm:git:ssh:git@github.com:datalbry/github-client.git")
+            url.set("https://github.com/datalbry/github-client")
         }
     }
 }
@@ -52,4 +50,3 @@ fun MavenPublication.publication() {
     version = projectVersion
     from(components["java"])
 }
-

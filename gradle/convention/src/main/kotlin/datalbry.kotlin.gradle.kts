@@ -1,20 +1,15 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
+    id("datalbry.repositories")
     kotlin("jvm")
     `java-library`
     idea
     jacoco
 }
 
-repositories {
-    mavenCentral()
-    mavenLocal()
-    google()
-}
-
-version = getVersion(project)
-group = "io.datalbry.precise"
+version = project.rootProject.version
+group = project.rootProject.group
 
 dependencies {
     runtimeOnly("org.jetbrains.kotlin:kotlin-reflect:1.4.21")
@@ -48,15 +43,4 @@ tasks.withType<Test> {
 java {
     withJavadocJar()
     withSourcesJar()
-}
-
-// Function to get the version of the archive
-fun getVersion(project: Project): String {
-    var version = project.version as String
-    var parent = project.parent
-    while (parent != null) {
-        version = parent.version as String
-        parent = parent.parent
-    }
-    return version
 }

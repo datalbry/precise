@@ -1,7 +1,7 @@
 plugins {
-    id("precise.publish-maven-central")
+    id("datalbry.publish-maven-central")
+    id("datalbry.version")
     idea
 }
 
 group = "io.datalbry.precise"
-version = "0.0.10"
