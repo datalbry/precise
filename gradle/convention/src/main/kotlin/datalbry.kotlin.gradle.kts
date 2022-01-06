@@ -11,9 +11,11 @@ plugins {
 version = project.rootProject.version
 group = project.rootProject.group
 
+
+val kotlinVersion = "1.5.31"
 dependencies {
-    runtimeOnly("org.jetbrains.kotlin:kotlin-reflect:1.4.21")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.4.21")
+    runtimeOnly("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 }
